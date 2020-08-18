@@ -3,7 +3,6 @@
 namespace Rawilk\Breadcrumbs;
 
 use Illuminate\Support\ServiceProvider;
-use Rawilk\Skeleton\Commands\SkeletonCommand;
 
 class BreadcrumbsServiceProvider extends ServiceProvider
 {
