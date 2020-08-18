@@ -1,16 +1,16 @@
 {
-    "name": "rawilk/:package_name",
-    "description": ":package_description",
+    "name": "rawilk/laravel-breadcrumbs",
+    "description": "Easily add breadcrumbs to a Laravel app.",
     "keywords": [
-        "rawilk",
-        ":package_name"
+        "laravel-breadcrumbs",
+        "breadcrumbs"
     ],
-    "homepage": "https://github.com/rawilk/:package_name",
+    "homepage": "https://github.com/rawilk/laravel-breadcrumbs",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Randall Wilk",
+            "email": "randall@randallwilk.dev",
             "homepage": "https://randallwilk.dev",
             "role": "Developer"
         }
@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rawilk\\Skeleton\\": "src"
+            "Rawilk\\Breadcrumbs\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rawilk\\Skeleton\\Tests\\": "tests"
+            "Rawilk\\Breadcrumbs\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,11 +47,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rawilk\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "Rawilk\\Skeleton\\Facades\\SkeletonFacade"
-            }
+                "Rawilk\\Breadcrumbs\\SkeletonServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
