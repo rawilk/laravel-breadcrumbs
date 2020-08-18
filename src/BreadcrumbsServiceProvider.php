@@ -36,7 +36,6 @@ class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrablePr
 
     protected function registerBreadcrumbs(): void
     {
-
     }
 
     public function provides(): array

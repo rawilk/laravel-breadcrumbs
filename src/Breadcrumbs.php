@@ -90,7 +90,6 @@ class Breadcrumbs
         try {
             return $this->generator->generate($this->callbacks, $this->before, $name, $params);
         } catch (\Exception $e) {
-
             return new Collection;
         }
     }

@@ -4,5 +4,4 @@ namespace Rawilk\Breadcrumbs\Contracts;
 
 interface Generator
 {
-
 }
