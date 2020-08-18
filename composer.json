@@ -48,7 +48,10 @@
         "laravel": {
             "providers": [
                 "Rawilk\\Breadcrumbs\\SkeletonServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Breadcrumbs": "Rawilk\\Breadcrumbs\\Facades\\Breadcrumbs"
+            }
         }
     },
     "minimum-stability": "dev",

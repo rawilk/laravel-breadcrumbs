@@ -2,9 +2,11 @@
 
 namespace Rawilk\Breadcrumbs;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use Rawilk\Breadcrumbs\Contracts\Generator;
 
-class BreadcrumbsServiceProvider extends ServiceProvider
+class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public function boot(): void
     {
@@ -19,10 +21,26 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'breadcrumbs');
+
+        $this->registerBreadcrumbs();
     }
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'breadrumbs');
+        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'breadcrumbs');
+
+        $this->app->bind(Generator::class, config('breadcrumbs.generator_class'));
+
+        $this->app->singleton(Breadcrumbs::class, config('breadcrumbs.breadcrumbs_class'));
+    }
+
+    protected function registerBreadcrumbs(): void
+    {
+
+    }
+
+    public function provides(): array
+    {
+        return [Breadcrumbs::class];
     }
 }
