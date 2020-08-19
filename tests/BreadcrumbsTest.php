@@ -19,7 +19,9 @@ class BreadcrumbsTest extends TestCase
     {
         parent::setUp();
 
-        $closure = function () { throw new LogicException; };
+        $closure = function () {
+            throw new LogicException;
+        };
 
         Route::get('/', $closure)->name('home');
 

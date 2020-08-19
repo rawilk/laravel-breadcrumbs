@@ -25,13 +25,15 @@ class IgnitionTest extends TestCase
     public function it_shows_a_solution_for_duplicate_breadcrumbs(array $files): void
     {
         config([
-            'breadcrumbs.files' => $files
+            'breadcrumbs.files' => $files,
         ]);
 
-        Breadcrumbs::for('duplicate', function () {});
+        Breadcrumbs::for('duplicate', function () {
+        });
 
         try {
-            Breadcrumbs::for('duplicate', function () {});
+            Breadcrumbs::for('duplicate', function () {
+            });
 
             self::fail('No exception thrown.');
         } catch (BreadcrumbAlreadyDefined $e) {

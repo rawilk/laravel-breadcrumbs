@@ -14,7 +14,7 @@ class GlobLoadingTest extends TestCase
         parent::getEnvironmentSetUp($app);
 
         $app['config']->set('breadcrumbs.files', [
-            glob(__DIR__ . '/breadcrumbs/*.php')
+            glob(__DIR__ . '/breadcrumbs/*.php'),
         ]);
     }
 

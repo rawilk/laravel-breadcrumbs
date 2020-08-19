@@ -14,7 +14,7 @@ class ArraySingleFileLoadingTest extends TestCase
         parent::getEnvironmentSetUp($app);
 
         $app['config']->set('breadcrumbs.files', [
-            __DIR__ . '/routes/breadcrumbs.php'
+            __DIR__ . '/routes/breadcrumbs.php',
         ]);
     }
 

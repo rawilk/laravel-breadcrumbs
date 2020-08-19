@@ -25,7 +25,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_renders_route_bound_breadcrumbs(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -46,7 +47,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_generates_route_bound_breadcrumbs(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -77,7 +79,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_can_render_route_bound_breadcrumbs_with_custom_views(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -100,7 +103,8 @@ class RouteBoundTest extends TestCase
     {
         $exists1 = false;
 
-        Breadcrumbs::for('exists', function () {});
+        Breadcrumbs::for('exists', function () {
+        });
 
         Route::get('/exists', function () use (&$exists1) {
             $exists1 = Breadcrumbs::exists();
@@ -132,7 +136,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function the_404_page_template_can_have_breadcrumbs(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -146,7 +151,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_can_handle_explicit_model_binding(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -164,7 +170,8 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_can_handle_implicit_model_binding(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
