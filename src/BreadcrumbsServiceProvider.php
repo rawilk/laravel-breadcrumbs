@@ -3,6 +3,7 @@
 namespace Rawilk\Breadcrumbs;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Rawilk\Breadcrumbs\Contracts\Generator;
 
@@ -27,7 +28,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrablePr
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'breadcrumbs');
+        $this->mergeConfigFrom(__DIR__ . '/../config/breadcrumbs.php', 'breadcrumbs');
 
         $this->app->bind(Generator::class, config('breadcrumbs.generator_class'));
 
@@ -36,7 +37,23 @@ class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrablePr
 
     protected function registerBreadcrumbs(): void
     {
+        $files = config('breadcrumbs.files');
 
+        if (! $files) {
+            return;
+        }
+
+        if (! is_array($files)) {
+            $files = [$files];
+        }
+
+        $files = Arr::flatten($files);
+
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                require $file;
+            }
+        }
     }
 
     public function provides(): array

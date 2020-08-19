@@ -11,6 +11,20 @@ class Generator implements GeneratorContract
     protected Collection $breadcrumbs;
     protected array $callbacks = [];
 
+    public function generate(array $callbacks, array $before, string $name, array $params): Collection
+    {
+        $this->breadcrumbs = new Collection;
+        $this->callbacks = $callbacks;
+
+        foreach ($before as $callback) {
+            $callback($this);
+        }
+
+        $this->call($name, $params);
+
+        return $this->breadcrumbs;
+    }
+
     protected function call(string $name, array $params): self
     {
         if (! isset($this->callbacks[$name])) {

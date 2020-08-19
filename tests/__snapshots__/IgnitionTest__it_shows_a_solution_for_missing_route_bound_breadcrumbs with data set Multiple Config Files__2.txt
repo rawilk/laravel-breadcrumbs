@@ -1,0 +1,4 @@
+
+```php
+Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Title Here', route('home')));
+```

@@ -1,0 +1,5 @@
+For example:
+
+```php
+Route::get('posts/{post}', 'Rawilk\Breadcrumbs\Tests\Http\Controllers\PostsController@edit')->name('sample-name');
+```

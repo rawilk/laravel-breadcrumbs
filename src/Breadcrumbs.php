@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 use Rawilk\Breadcrumbs\Contracts\Generator;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbAlreadyDefined;
+use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsViewNotSet;
 use Rawilk\Breadcrumbs\Exceptions\UnnamedRoute;
 
@@ -20,7 +21,6 @@ class Breadcrumbs
     protected ViewFactory $viewFactory;
     protected array $callbacks = [];
     protected array $before = [];
-    protected array $after = [];
     protected ?array $route = null;
 
     public function __construct(Generator $generator, Router $router, ViewFactory $viewFactory)
@@ -62,7 +62,7 @@ class Breadcrumbs
         if (is_null($name)) {
             try {
                 [$name] = $this->getCurrentRoute();
-            } catch (\Exception $e) {
+            } catch (UnnamedRoute $e) {
                 return false;
             }
         }
@@ -89,7 +89,16 @@ class Breadcrumbs
 
         try {
             return $this->generator->generate($this->callbacks, $this->before, $name, $params);
-        } catch (\Exception $e) {
+        } catch (BreadcrumbsNotRegistered $e) {
+            if ($originalName === null && config('breadcrumbs.exceptions.missing_route_bound_breadcrumb')) {
+                $e->isRouteBound();
+
+                throw $e;
+            }
+
+            if ($originalName !== null && config('breadcrumbs.exceptions.not_registered')) {
+                throw $e;
+            }
 
             return new Collection;
         }
@@ -111,6 +120,11 @@ class Breadcrumbs
         }
 
         return $this->view($view, $name, ...$params);
+    }
+
+    public function current(): ?object
+    {
+        return $this->generate()->where('current', '!==', false)->last();
     }
 
     /**

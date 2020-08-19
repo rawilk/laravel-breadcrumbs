@@ -17,7 +17,9 @@ return [
      * The file(s) where breadcrumbs are defined. e.g.
      * - base_path('routes/breadcrumbs.php')
      */
-    'files' => base_path('routes/breadcrumbs.php'),
+    'files' => [
+        base_path('routes/breadcrumbs.php'),
+    ],
 
     /*
      * Exceptions:
@@ -27,6 +29,12 @@ return [
     'exceptions' => [
         // Thrown when rendering route-bound breadcrumbs but the current route doesn't have a name.
         'unnamed_route' => true,
+
+        // Thrown when attempting to render breadcrumbs that have not been registered.
+        'not_registered' => true,
+
+        // Thrown when attempting to render "route-bound" breadcrumbs and the named route's breadcrumbs are not defined.
+        'missing_route_bound_breadcrumb' => true,
     ],
 
     /*
