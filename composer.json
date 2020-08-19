@@ -16,10 +16,13 @@
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "facade/ignition-contracts": "^1.0",
+        "illuminate/contracts": "^6.0|^7.0",
+        "illuminate/routing": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
-        "facade/ignition-contracts": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "orchestra/testbench": "^5.0",
         "phpunit/phpunit": "^9.0",
