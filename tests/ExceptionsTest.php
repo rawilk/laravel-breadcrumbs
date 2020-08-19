@@ -19,8 +19,10 @@ class ExceptionsTest extends TestCase
     {
         $this->expectException(BreadcrumbAlreadyDefined::class);
 
-        Breadcrumbs::for('duplicate', function () {});
-        Breadcrumbs::for('duplicate', function () {});
+        Breadcrumbs::for('duplicate', function () {
+        });
+        Breadcrumbs::for('duplicate', function () {
+        });
     }
 
     /** @test */

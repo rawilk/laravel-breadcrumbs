@@ -53,7 +53,7 @@ class BreadcrumbsNotRegistered extends Exception implements ProvidesSolution
         }
 
         $links = [
-            'Defining Breadcrumbs' => IgnitionLinks::DEFINING_BREADCRUMBS
+            'Defining Breadcrumbs' => IgnitionLinks::DEFINING_BREADCRUMBS,
         ];
 
         if ($this->isRouteBound) {

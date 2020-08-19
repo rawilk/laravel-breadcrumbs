@@ -65,7 +65,8 @@ class AdvancedUsageTest extends TestCase
     /** @test */
     public function it_can_get_the_current_breadcrumbs_title(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Route::get('/post/{post}', fn (Post $post) => Breadcrumbs::current()->title)->middleware(SubstituteBindings::class)->name('post');
 
@@ -84,8 +85,10 @@ class AdvancedUsageTest extends TestCase
     /** @test */
     public function it_generates_a_collection_of_breadcrumbs(): void
     {
-        Route::get('/', function () {})->name('home');
-        Route::get('/post/{post}', function () {})->name('post');
+        Route::get('/', function () {
+        })->name('home');
+        Route::get('/post/{post}', function () {
+        })->name('post');
 
         Breadcrumbs::for('post', static function (Generator $trail, $id) {
             $trail
@@ -103,7 +106,8 @@ class AdvancedUsageTest extends TestCase
     /** @test */
     public function it_is_macroable(): void
     {
-        Route::get('/', function () {})->name('home');
+        Route::get('/', function () {
+        })->name('home');
 
         Route::get('/post/{post}', fn (Post $post) => Breadcrumbs::pageTitle())->middleware(SubstituteBindings::class)->name('post');
 
@@ -132,14 +136,22 @@ class AdvancedUsageTest extends TestCase
     /** @test */
     public function other_breadcrumbs_can_be_created_in_macros(): void
     {
-        Route::get('/', function () {})->name('home');
-        Route::get('/blog', function () {})->name('blog.index');
-        Route::get('/blog/create', function () {})->name('blog.create');
-        Route::post('/blog', function () {})->name('blog.store');
-        Route::get('/blog/{post}', function (Post $post) {})->middleware(SubstituteBindings::class)->name('blog.show');
-        Route::get('/blog/{post}/edit', function (Post $post) {})->middleware(SubstituteBindings::class)->name('blog.edit');
-        Route::put('/blog/{post}', function (Post $post) {})->middleware(SubstituteBindings::class)->name('blog.update');
-        Route::delete('/blog/{post}', function (Post $post) {})->middleware(SubstituteBindings::class)->name('blog.destroy');
+        Route::get('/', function () {
+        })->name('home');
+        Route::get('/blog', function () {
+        })->name('blog.index');
+        Route::get('/blog/create', function () {
+        })->name('blog.create');
+        Route::post('/blog', function () {
+        })->name('blog.store');
+        Route::get('/blog/{post}', function (Post $post) {
+        })->middleware(SubstituteBindings::class)->name('blog.show');
+        Route::get('/blog/{post}/edit', function (Post $post) {
+        })->middleware(SubstituteBindings::class)->name('blog.edit');
+        Route::put('/blog/{post}', function (Post $post) {
+        })->middleware(SubstituteBindings::class)->name('blog.update');
+        Route::delete('/blog/{post}', function (Post $post) {
+        })->middleware(SubstituteBindings::class)->name('blog.destroy');
 
         Breadcrumbs::macro('resource', function ($name, $title) {
             // Home > Blog
