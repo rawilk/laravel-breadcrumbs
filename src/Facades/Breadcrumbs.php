@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Support\Collection generate(string $name = null, ...$params)
  * @method static string view(string $view, string $name = null, ...$params)
  * @method static string render(string $name = null, ...$params)
+ * @method static object|null current()
+ * @method static \Rawilk\Breadcrumbs\Breadcrumbs setCurrentRoute(string $name, ...$params)
+ * @method static \Rawilk\Breadcrumbs\Breadcrumbs clearCurrentRoute()
  * @see \Rawilk\Breadcrumbs\Breadcrumbs
  * @mixin \Illuminate\Support\Traits\Macroable
  */
