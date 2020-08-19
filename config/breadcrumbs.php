@@ -8,6 +8,9 @@ return [
      * Built-in templates are:
      *
      * - 'breadcrumbs::tailwind' - TailwindCSS
+     * - 'breadcrumbs::bootstrap4' - Bootstrap 4
+     * - 'breadcrumbs::bulma' - Bulma
+     * - 'breadcrumbs::json-ld' - JSON-LD Structured Data
      */
     'view' => 'breadcrumbs::tailwind',
 

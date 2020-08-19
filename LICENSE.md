@@ -19,3 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+Classes under the laravel-breadcrumbs package were taken from package davejamesmiller/laravel-breadcrumbs,
+Copyright 2013-2019 Dave James Miller. These classes are licensed under the MIT license. See [MILLER-LICENSE.md](https://github.com/rawilk/laravel-breadcrumbs/blob/master/MILLER-LICENSE.md)
+for additional details.
