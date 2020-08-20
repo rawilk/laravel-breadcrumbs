@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Facade;
  * @method static object|null current()
  * @method static \Rawilk\Breadcrumbs\Breadcrumbs setCurrentRoute(string $name, ...$params)
  * @method static \Rawilk\Breadcrumbs\Breadcrumbs clearCurrentRoute()
+ * @method static void macro(string $name, object|callable $macro)
+ * @method static bool hasMacro(string $name)
  * @see \Rawilk\Breadcrumbs\Breadcrumbs
- * @mixin \Illuminate\Support\Traits\Macroable
  */
 class Breadcrumbs extends Facade
 {
