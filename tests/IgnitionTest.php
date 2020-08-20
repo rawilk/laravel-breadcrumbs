@@ -153,9 +153,27 @@ class IgnitionTest extends TestCase
     {
         $solution = $exception->getSolution();
 
-        $this->assertMatchesSnapshot($solution->getSolutionTitle());
-        $this->assertMatchesSnapshot($solution->getSolutionDescription());
-        $this->assertMatchesSnapshot($solution->getDocumentationLinks());
+        $this->assertSnapshot($solution->getSolutionTitle());
+        $this->assertSnapshot($solution->getSolutionDescription());
+        $this->assertSnapshot($this->convertLinksToString($solution->getDocumentationLinks()));
+    }
+
+    protected function convertLinksToString(array $links): string
+    {
+        $string = '';
+
+        foreach ($links as $key => $value) {
+            $string .= "'{$key}': '{$value}'\n";
+        }
+
+        return $string;
+    }
+
+    protected function assertSnapshot(string $string): void
+    {
+        $string = str_replace("\r\n", "\n", $string);
+
+        $this->assertMatchesSnapshot($string);
     }
 
     public function oneOrManyConfigFiles(): array
