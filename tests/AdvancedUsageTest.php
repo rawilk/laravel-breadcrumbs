@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 use Rawilk\Breadcrumbs\Tests\Concerns\NeedsDatabase;
 use Rawilk\Breadcrumbs\Tests\Models\Post;
-use Spatie\Snapshots\MatchesSnapshots;
 
 class AdvancedUsageTest extends TestCase
 {
-    use MatchesSnapshots, NeedsDatabase;
+    use AssertsSnapshots, NeedsDatabase;
 
     protected function setUp(): void
     {
@@ -59,7 +59,7 @@ class AdvancedUsageTest extends TestCase
 
         $html = $this->get('/')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -225,7 +225,7 @@ class AdvancedUsageTest extends TestCase
 
         $html = Breadcrumbs::render();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -237,7 +237,7 @@ class AdvancedUsageTest extends TestCase
 
         $html = Breadcrumbs::render();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
