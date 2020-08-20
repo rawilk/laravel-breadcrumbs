@@ -11,3 +11,6 @@
 /.php.cs            export-ignore
 /.github            export-ignore
 /docs               export-ignore
+
+# to make CI for windows happy on some snapshot tests...
+tests/**/__snapshots__/** text eol=lf
