@@ -4,11 +4,11 @@ namespace Rawilk\Breadcrumbs\Tests;
 
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class RecursionTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected object $category1;
     protected object $category2;
@@ -43,7 +43,7 @@ class RecursionTest extends TestCase
 
         $html = Breadcrumbs::render('category', $this->category3);
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -65,6 +65,6 @@ class RecursionTest extends TestCase
 
         $html = Breadcrumbs::render('category', $this->category3);
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

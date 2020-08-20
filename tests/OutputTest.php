@@ -4,11 +4,11 @@ namespace Rawilk\Breadcrumbs\Tests;
 
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class OutputTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected object $category;
 
@@ -46,7 +46,7 @@ class OutputTest extends TestCase
         // {{ Breadcrumbs::render('category', $category) }}
         $html = view('category')->with('category', $this->category)->render();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class OutputTest extends TestCase
         // @section('breadcrumbs', Breadcrumbs::render('category', $category))
         $html = view('view-section')->with('category', $this->category)->render();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -64,6 +64,6 @@ class OutputTest extends TestCase
         // <?php echo Breadcrumbs::render('category', $category);
         $html = view('view-php')->with('category', $this->category)->render();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

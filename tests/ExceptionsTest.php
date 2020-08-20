@@ -8,11 +8,11 @@ use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsViewNotSet;
 use Rawilk\Breadcrumbs\Exceptions\UnnamedRoute;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class ExceptionsTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     /** @test */
     public function it_throws_an_exception_when_a_breadcrumb_is_defined_twice(): void
@@ -47,7 +47,7 @@ class ExceptionsTest extends TestCase
         $html = Breadcrumbs::render('not-defined');
 
         // <p>No breadcrumbs</p>
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -89,7 +89,7 @@ class ExceptionsTest extends TestCase
 
         $html = $this->get('/')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -131,6 +131,6 @@ class ExceptionsTest extends TestCase
 
         $html = $this->get('/')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

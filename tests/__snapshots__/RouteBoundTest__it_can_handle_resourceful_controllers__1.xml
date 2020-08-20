@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ol>
+  <li>
+    <a href="http://localhost/post">Posts</a>
+  </li>
+  <li>
+    <a href="http://localhost/post/1">Post 1</a>
+  </li>
+  <li class="current">Edit Post</li>
+</ol>

@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Route;
 use LogicException;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class BreadcrumbsTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected object $category;
     protected object $post;
@@ -84,7 +84,7 @@ class BreadcrumbsTest extends TestCase
     {
         $html = Breadcrumbs::render('home');
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -92,7 +92,7 @@ class BreadcrumbsTest extends TestCase
     {
         $html = Breadcrumbs::render('blog');
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -100,7 +100,7 @@ class BreadcrumbsTest extends TestCase
     {
         $html = Breadcrumbs::render('category', $this->category);
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -108,6 +108,6 @@ class BreadcrumbsTest extends TestCase
     {
         $html = Breadcrumbs::render('post', $this->post);
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

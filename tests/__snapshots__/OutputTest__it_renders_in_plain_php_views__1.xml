@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<nav id="php-view-nav">
+  <ol>
+    <li>
+      <a href="http://localhost">Home</a>
+    </li>
+    <li>Blog</li>
+    <li class="current">Example Category</li>
+  </ol>
+</nav>

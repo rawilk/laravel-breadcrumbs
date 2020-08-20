@@ -3,11 +3,11 @@
 namespace Rawilk\Breadcrumbs\Tests;
 
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class SingleFileLoadingTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected function getEnvironmentSetUp($app)
     {
@@ -21,6 +21,6 @@ class SingleFileLoadingTest extends TestCase
     {
         $html = Breadcrumbs::render('single-file-test');
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

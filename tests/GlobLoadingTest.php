@@ -3,11 +3,11 @@
 namespace Rawilk\Breadcrumbs\Tests;
 
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class GlobLoadingTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected function getEnvironmentSetUp($app)
     {
@@ -23,6 +23,6 @@ class GlobLoadingTest extends TestCase
     {
         $html = Breadcrumbs::render('multiple-file-test');
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

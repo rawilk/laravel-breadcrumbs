@@ -6,14 +6,14 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 use Rawilk\Breadcrumbs\Tests\Concerns\NeedsDatabase;
 use Rawilk\Breadcrumbs\Tests\Http\Controllers\PostsController;
 use Rawilk\Breadcrumbs\Tests\Models\Post;
-use Spatie\Snapshots\MatchesSnapshots;
 
 class RouteBoundTest extends TestCase
 {
-    use MatchesSnapshots, NeedsDatabase;
+    use AssertsSnapshots, NeedsDatabase;
 
     protected function setUp(): void
     {
@@ -41,7 +41,7 @@ class RouteBoundTest extends TestCase
 
         $html = $this->get('/post/1')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -95,7 +95,7 @@ class RouteBoundTest extends TestCase
 
         $html = $this->get('/post/1')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -145,7 +145,7 @@ class RouteBoundTest extends TestCase
 
         $html = $this->withExceptionHandling()->get('/does-not-exist')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -164,7 +164,7 @@ class RouteBoundTest extends TestCase
 
         $html = $this->get('/post/1')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -184,7 +184,7 @@ class RouteBoundTest extends TestCase
 
         $html = $this->get('/post/1')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     /** @test */
@@ -205,6 +205,6 @@ class RouteBoundTest extends TestCase
 
         $html = $this->get('/post/1/edit')->content();
 
-        $this->assertMatchesHtmlSnapshot($html);
+        $this->assertHtml($html);
     }
 }

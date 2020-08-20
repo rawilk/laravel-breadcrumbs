@@ -4,11 +4,11 @@ namespace Rawilk\Breadcrumbs\Tests;
 
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Spatie\Snapshots\MatchesSnapshots;
+use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
 
 class TemplatesTest extends TestCase
 {
-    use MatchesSnapshots;
+    use AssertsSnapshots;
 
     protected object $category;
 
@@ -40,7 +40,7 @@ class TemplatesTest extends TestCase
     {
         $html = Breadcrumbs::view("breadcrumbs::{$view}", 'category', $this->category);
 
-        $this->assertMatchesXmlSnapshot($html);
+        $this->assertHtml($html);
     }
 
     public function viewProvider(): \Generator

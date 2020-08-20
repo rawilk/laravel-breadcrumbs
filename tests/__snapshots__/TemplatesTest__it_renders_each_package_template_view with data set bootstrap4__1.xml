@@ -4,11 +4,7 @@
     <li class="breadcrumb-item">
       <a href="http://localhost">Home</a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">
-                    Blog
-                </li>
-    <li class="breadcrumb-item active" aria-current="page">
-                    Example Category
-                </li>
+    <li class="breadcrumb-item active" aria-current="page"> Blog </li>
+    <li class="breadcrumb-item active" aria-current="page"> Example Category </li>
   </ol>
 </nav>

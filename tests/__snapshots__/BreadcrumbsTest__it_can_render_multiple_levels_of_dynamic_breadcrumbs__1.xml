@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ol>
+  <li>
+    <a href="http://localhost">Home</a>
+  </li>
+  <li>
+    <a href="http://localhost/blog">Blog</a>
+  </li>
+  <li>
+    <a href="http://localhost/blog/category/123">Example Category</a>
+  </li>
+  <li class="current">Sample Post</li>
+</ol>
