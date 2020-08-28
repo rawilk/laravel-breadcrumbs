@@ -120,8 +120,8 @@ Breadcrumbs::for('category', function (Generator $trail, $category) {
 
 Both would be rendered like this:
 
-```
-html{{ Breadcrumbs::render('category', $category) }}
+```html
+{{ Breadcrumbs::render('category', $category) }}
 ```
 
 The result could end up like this:
