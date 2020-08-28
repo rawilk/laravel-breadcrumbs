@@ -27,7 +27,8 @@ To customize the HTML, create your own view file (e.g. `resources/views/partials
 @endif
 ```
 
->{.tip} See the [views/ directory](https://github.com/rawilk/laravel-breadcrumbs/tree/master/resources/views) for the built-in templates.
+{.tip}
+> See the [views/ directory](https://github.com/rawilk/laravel-breadcrumbs/tree/master/resources/views) for the built-in templates.
 
 ### View Data
 
