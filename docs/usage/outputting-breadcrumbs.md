@@ -19,7 +19,7 @@ Or with a parameter:
 {{ Breadcrumbs::render('category', $category) }}
 ```
 
-## With Blade Layouts and @@section
+## With Blade Layouts and @section
 
 In the page (e.g. `resources/views/home.blade.php`):
 
