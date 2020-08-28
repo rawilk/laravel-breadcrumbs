@@ -5,19 +5,21 @@ sort: 3
 
 laravel-breadcrumbs can be installed via composer:
 
-<x-code lang="bash">composer require rawilk/laravel-breadcrumbs</x-code>
+```bash
+composer require rawilk/laravel-breadcrumbs
+```
 
 ## Config
 
 You may publish the configuration file like this:
 
-<x-code lang="bash">
+```bash
 php artisan vendor:publish --provider="Rawilk\Breadcrumbs\BreadcrumbsServiceProvider" --tag="config"
-</x-code>
+```
 
 This is the default content of `config/breadcrumbs.php`:
 
-<x-code lang="php">
+```php
 return [
     /*
      * View name:
@@ -73,4 +75,4 @@ return [
      */
     'generator_class' => \Rawilk\Breadcrumbs\Support\Generator::class,
 ];
-</x-code>
+```

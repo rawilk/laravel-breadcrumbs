@@ -9,52 +9,55 @@ Call `Breadcrumbs::render()` in the view for each page, passing it the name of t
 
 In the page (e.g. `resources/views/home.blade.php`):
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::render('home') }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::render('home') }}
+```
 
 Or with a parameter:
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::render('category', $category) }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::render('category', $category) }}
+```
 
 ## With Blade Layouts and @@section
 
 In the page (e.g. `resources/views/home.blade.php`):
 
-<x-code lang="html">
-@verbatim
+```html
 @extends('layouts.master')
 
 @section('breadcrumbs')
     {{ Breadcrumbs::render('home') }}
 @endsection
-@endverbatim
-</x-code>
+```
 
 Or using the shorthand syntax:
 
-<x-code lang="html">
-@verbatim
+```html
 @extends('layouts.master')
 
 @section('breadcrumbs', Breadcrumbs::render('home'))
-@endverbatim
-</x-code>
+```
 
 And in the layout file (e.g. `resources/views/layouts/master.blade.php`):
 
-<x-code lang="html">@verbatim@yield('breadcrumbs')@endverbatim</x-code>
+```html
+@yield('breadcrumbs')
+```
 
 ## Pure PHP (without Blade)
 In the page (e.g. `resources/views/home.php`):
 
-<x-code lang="php">{!! '<?php' !!} echo Breadcrumbs::render('home'); ?></x-code>
+```php
+<?php echo Breadcrumbs::render('home'); ?>
+```
 
 ## Structured Data
 
 To render breadcrumbs as JSON-LD [structured data](https://developers.google.com/search/docs/data-types/breadcrumbs) (usually for SEO reasons),
 use `Breadcrumbs::view()` to render the `breadcrumbs::json-ld` template in addition to the normal one. For example:
 
-<x-code lang="html">
-@verbatim
+```html
 <html>
     <head>
         ...
@@ -67,18 +70,17 @@ use `Breadcrumbs::view()` to render the `breadcrumbs::json-ld` template in addit
         ...
     </body>
 </html>
-@endverbatim
-</x-code>
+```
 
-<x-tip><strong>Note:</strong> If you use <a href="https://github.com/renatomarinho/laravel-page-speed">Laravel Page Speed</a> you may need to <a href="https://github.com/renatomarinho/laravel-page-speed/issues/66">disable the <code>TrimUrls</code> middleware</a>.</x-tip>
+>{.tip} **Note:** If you use [Laravel Page Speed](https://github.com/renatomarinho/laravel-page-speed) you may need to [disable the `TrimUrls` middleware](https://github.com/renatomarinho/laravel-page-speed/issues/66).
 
 To specify an image, add it to the `$data` parameter in `push()`:
 
-<x-code lang="php">
+```php
 Breadcrumbs::for('post', function (Generator $trail, $post) {
     $trail->parent('home')
         ->push($post->title, route('post', $post), ['image' => asset($post->image)]);
 });
-</x-code>
+```
 
-If you prefer to use Microdata or RDFa, you will need to create a [custom template](/laravel-breadcrumbs/v1/usage/custom-templates).
+If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/v1/usage/custom-templates).

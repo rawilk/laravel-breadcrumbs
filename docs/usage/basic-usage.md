@@ -7,7 +7,7 @@ sort: 1
 
 Create a file called `routes/breadcrumbs.php`:
 
-<x-code lang="php">
+```php
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
 
@@ -37,11 +37,9 @@ Breadcrumbs::for(
     'post',
     fn (Generator $trail, $post) => $trail->parent('category', $post->category)->push($post->title, route('post', $post->id))
 );
-</x-code>
+```
 
-<x-tip>
-    See <a href="/laravel-breadcrumbs/v1/usage/defining-breadcrumbs">Defining Breadcrumbs</a> for more details.
-</x-tip>
+>{.tip} See [Defining Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/defining-breadcrumbs) for more details.
 
 ## Choose a Template
 
@@ -51,7 +49,9 @@ you may need to adjust the template or use a custom one.
 
 In the `config/breadcrumbs.php` file, edit this line:
 
-<x-code lang="php">'view' => 'breadcrumbs::tailwind',</x-code>
+```php
+'view' => 'breadcrumbs::tailwind',
+```
 
 Other predefined templates include:
 
@@ -60,22 +60,18 @@ Other predefined templates include:
 - `breadcrumbs::json-ld` - [JSON-LD Structured Data](https://developers.google.com/search/docs/data-types/breadcrumbs) (`<script />` tag, no visible output)
 - The path to a custom view: e.g. `partials.breadcrumbs`
 
-<x-tip>See <a href="/laravel-breadcrumbs/v1/usage/custom-templates">Custom Templates</a> for more details.</x-tip>
+>{.tip} See [Custom Templates](/docs/laravel-breadcrumbs/v1/usage/custom-templates) for more details.
 
 ## Render the Breadcrumbs
 
 Finally, call `Breadcrumbs::render()` in the view for each page, passing it the name of the breadcrumb to use and any additional parameters you need.
 
-<x-code lang="html">
-@verbatim
+```html
 {{ Breadcrumbs::render('home') }}
 
 {{ Breadcrumbs::render('category', $category) }}
-@endverbatim
-</x-code>
+```
 
-<x-tip>
-See <a href="/laravel-breadcrumbs/v1/usage/outputting-breadcrumbs">Outputting Breadcrumbs</a> for other output options, and see
-<a href="/laravel-breadcrumbs/v1/advanced-usage/route-bound-breadcrumbs">Route-Bound Breadcrumbs</a> for a way to link
-breadcrumb names to route names automatically.
-</x-tip>
+>{.tip} See [Outputting Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/outputting-breadcrumbs) for other output options, and see
+> [Route-Bound Breadcrumbs](/docs/laravel-breadcrumbs/v1/advanced-usage/route-bound-breadcrumbs) for a way to link
+> breadcrumb names to route names automatically.

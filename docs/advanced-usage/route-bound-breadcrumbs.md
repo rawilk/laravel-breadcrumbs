@@ -10,15 +10,13 @@ If you prefer, you can name your breadcrumbs the same as you name your routes an
 
 Make sure each of your routes has a name. For example (`routes/web.php`):
 
-<x-code lang="php">
-@verbatim
+```php
 // Home
 Route::get('/', 'HomeController@index')->name('home');
 
 // Home > [Post]
 Route::get('/post/{id}', 'PostsController@show')->name('post');
-@endverbatim
-</x-code>
+```
 
 For more details see [Named Routes](https://laravel.com/docs/7.x/routing#named-routes) in the Laravel documentation.
 
@@ -26,7 +24,7 @@ For more details see [Named Routes](https://laravel.com/docs/7.x/routing#named-r
 
 For each route, create a breadcrumb with the same name and parameters. For example (`routes/breadcrumbs.php`):
 
-<x-code lang="php">
+```php
 // Home
 Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
@@ -35,59 +33,65 @@ Breadcrumbs::for('post', function (Generator $trail, $id) {
     $post = Post::findOrFail($id);
     $trail->parent('home')->push($post->title, route('post', $post));
 });
-</x-code>
+```
 
 To add breadcrumbs to a [custom 404 Not Found page](https://laravel.com/docs/7.x/errors#custom-http-error-pages), use the name `errors.404`:
 
-<x-code lang="php">
+```php
 // Error 404
 Breadcrumbs::for('errors.404', fn (Generator $trail) => $trail->parent('home')->push('Page Not Found'));
-</x-code>
+```
 
 ## Output Breadcrumbs in your Layout
 
 Call `Breadcrumbs::render()` with no parameters in your layout file (e.g. `resources/views/app.blade.php`):
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::render() }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::render() }}
+```
 
 This will automatically output breadcrumbs corresponding to the current route. The same applies to `Breadcrumbs::generate()`:
 
-<x-code lang="php">$breadcrumbs = Breadcrumbs::generate();</x-code>
+```php
+$breadcrumbs = Breadcrumbs::generate();
+```
 
 And for `Breadcrumbs::view()`:
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::view('breadcrumbs::json-ld') }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::view('breadcrumbs::json-ld') }}
+```
 
 ## Route Binding Exceptions
 
 If you try to render a breadcrumb that doesn't exist, the package will throw a `BreadcrumbsNotRegistered` Exception to remind you to create one.
 You can disable this (e.g. if you have some pages with no breadcrumbs) in the `config/breadcrumbs.php` file:
 
-<x-code lang="php">
+```php
 'exceptions' => [
     ...
     'missing_route_bound_breadcrumb' => false,
 ],
-</x-code>
+```
 
 Similarly, to prevent it from throwing an `UnnamedRoute` Exception if the current route doesn't have a name, set this value:
 
-<x-code lang="php">
+```php
 'exceptions' => [
     'unnamed_route' => false,
     ...
 ],
-</x-code>
+```
 
 ## Route Model Binding
 Laravel Breadcrumbs uses the same binding as the controller. For example:
 
-<x-code lang="php">
+```php
 // routes/web.php
 Route::get('/post/{post}', 'PostsController@show')->name('post');
-</x-code>
+```
 
-<x-code lang="php">
+```php
 // app/Http/Controllers/PostsController.php
 use App\Post;
 
@@ -98,15 +102,15 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 }
-</x-code>
+```
 
-<x-code lang="php">
+```php
 // routes/breadcrumbs.php
 Breadcrumbs::for('post', function (Generator $trail, $post) { // <-- The same Post model is injected here
     $trail->parent('home')
         ->push($post->title, route('post', $post));
 });
-</x-code>
+```
 
 Using route model binding makes your code less verbose and more efficient by only loading the post from the database once.
 You can optionally type-hint the `$post` parameter for clarity if you want to.

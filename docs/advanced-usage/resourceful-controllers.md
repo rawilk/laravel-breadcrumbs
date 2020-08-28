@@ -6,14 +6,14 @@ sort: 4
 Laravel automatically creates route names for resourceful controllers, e.g. `photo.index`, which you can use when
 defining your breadcrumbs. For example:
 
-<x-code lang="php">
+```php
 // routes/web.php
 Route::resource('photo', PhotoController::class);
-</x-code>
+```
 
 The generated routes:
 
-<x-code lang="bash">
+```bash
 $ php artisan route:list
 +--------+----------+--------------------+---------------+-------------------------+------------+
 | Domain | Method   | URI                | Name          | Action                  | Middleware |
@@ -27,11 +27,11 @@ $ php artisan route:list
 |        | PATCH    | photo/{photo}      |               | PhotoController@update  |            |
 |        | DELETE   | photo/{photo}      | photo.destroy | PhotoController@destroy |            |
 +--------+----------+--------------------+---------------+-------------------------+------------+
-</x-code>
+```
 
 Your breadcrumbs:
 
-<x-code lang="php">
+```php
 // routes/breadcrumbs.php
 
 // Photos
@@ -57,6 +57,6 @@ Breadcrumbs::for(
     'photo.edit',
     fn (Generator $trail, $photo) => $trail->parent('photo.show', $photo)->push('Edit Photo', route('photo.edit', $photo))
 );
-</x-code>
+```
 
 For more details see [Resource Controllers](https://laravel.com/docs/7.x/controllers#resource-controllers) in the Laravel documentation.

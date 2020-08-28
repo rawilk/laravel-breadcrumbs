@@ -7,7 +7,9 @@ sort: 1
 
 The second parameter to `push()` is optional, so if you want a breadcrumb with no URL, you can do so:
 
-<x-code lang="php">$trail->push('Sample');</x-code>
+```php
+$trail->push('Sample');
+```
 
 The `$breadcrumb->url` value will be `null`.
 
@@ -18,34 +20,36 @@ The default TailwindCSS templates provided render this with a CSS class of `brea
 The `push()` method accepts an optional third parameter, `$data` - an array of arbitrary data to be passed to the breadcrumb,
 which you can use in your custom template. For example, if you wanted each breadcrumb to have an icon, you could do:
 
-<x-code lang="php">$trail->push('Home', '/', ['icon' => 'home.png']);</x-code>
+```php
+$trail->push('Home', '/', ['icon' => 'home.png']);
+```
 
 The `$data` array's entries will be merged into the breadcrumb as properties, so you would access the icon as `$breadcrumb->icon` in your
 template, like this:
 
-<x-code lang="html">
-@verbatim
+```html
 <li>
     <a href="{{ $breadcrumb->url }}">
         <img src="/images/icons/{{ $breadcrumb->icon }}">
         {{ $breadcrumb->title }}
     </a>
 </li>
-@endverbatim
-</x-code>
+```
 
-<x-tip>Do not use keys like <code>title</code> or <code>url</code> as they will be overwritten.</x-tip>
+>{.tip} Do not use keys like `title` or `url` as they will be overwritten.
 
 ## Getting the Current Page Breadcrumb
 
 To get the last breadcrumb for the current page, use `Breadcrumb::current()`. For example, you could use this to
 output the current page title:
 
-<x-code lang="html">@verbatim<title>{{ ($breadcrumb = Breadcrumb::current()) ? $breadcrumb->title : 'Fallback Title'  }}</title>@endverbatim</x-code>
+```html
+<title>{{ ($breadcrumb = Breadcrumb::current()) ? $breadcrumb->title : 'Fallback Title'  }}</title>
+```
 
 To ignore a breadcrumb, add `'current' => false` ot the `$data` parameter in `push()`. This can be useful to ignore pagination breadcrumbs.
 
-<x-code lang="php">
+```php
 Breadcrumbs::for('post', function (Generator $trail, Post $post) {
     $trail->push($post->title, route('post', $post));
 
@@ -54,36 +58,38 @@ Breadcrumbs::for('post', function (Generator $trail, Post $post) {
         $trail->push("Page {$page}", null, ['current' => false]);
     }
 });
-</x-code>
+```
 
-<x-code lang="html">
-@verbatim
+```html
 <title>
     {{ ($breadcrumb = Breadcrumbs::current()) ? "{$breadcrumb->title} -" : '' }}
     {{ ($page = (int) request('page')) > 1 ? "Page {$page} -" : '' }}
     Acme
 </title>
-@endverbatim
-</x-code>
+```
 
 ## Switching Views at Runtime
-You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/laravel-breadcrumbs/v1/usage/basic-usage#choose-a-template):
+You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/v1/usage/basic-usage#choose-a-template):
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::view('partials.breadcrumbs2', 'category', $category) }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::view('partials.breadcrumbs2', 'category', $category) }}
+```
 
 Or you can override the config setting to affect all future `render()` calls:
 
-<x-code lang="php">Config::set('breadcrumbs.view', 'partials.breadcrumbs2');</x-code>
+```php
+Config::set('breadcrumbs.view', 'partials.breadcrumbs2');
+```
 
-<x-code lang="html">@verbatim{{ Breadcrumbs::render('category', $category) }}@endverbatim</x-code>
+```html
+{{ Breadcrumbs::render('category', $category) }}
+```
 
 Or you could call `Breadcrumbs::generate()` to get the breadcrumbs collection and load the view manually:
 
-<x-code lang="html">
-@verbatim
+```html
 @include('partials.breadcrumbs2', ['breadcrumbs' => Breadcrumbs::generate('category', $category)])
-@endverbatim
-</x-code>
+```
 
 ## Overriding the "Current" Route
 

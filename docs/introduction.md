@@ -10,7 +10,7 @@ own Laravel apps.
 
 Here's a simple example of how you can define breadcrumbs, and then render them in a view:
 
-<x-code lang="php">
+```php
 // somewhere in a file defined in config/breadcrumbs.php.
 // default: 'view' => base_path('routes/breadcrumbs.php')
 
@@ -26,11 +26,11 @@ Breadcrumbs::for('home', function (Generator $trail) {
 Breadcrumbs::for('about', function (Generator $trail) {
     $trail->parent('home')->push('About', route('about'));
 });
-</x-code>
+```
 
 Now in a view somewhere, enter this:
 
-<x-code lang="html">
+```html
 <!-- will render a partial with links for Home > About -->
-@{{ Breadcrumbs::render('about') }}
-</x-code>
+{{ Breadcrumbs::render('about') }}
+```

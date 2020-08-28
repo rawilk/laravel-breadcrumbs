@@ -5,7 +5,7 @@ sort: 7
 
 The Breadcrumbs instance is [macroable](https://unnikked.ga/understanding-the-laravel-macroable-trait-dab051f09172), so you can add your own methods. For example:
 
-<x-code lang="php">
+```php
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 
 Breadcrumbs::macro('pageTitle', function () {
@@ -17,6 +17,8 @@ Breadcrumbs::macro('pageTitle', function () {
 
     return $title . 'Acme';
 });
-</x-code>
+```
 
-<x-code lang="html">@verbatim<title>{{ Breadcrumbs::pageTitle() }}</title>@endverbatim</x-code>
+```html
+<title>{{ Breadcrumbs::pageTitle() }}</title>
+```
