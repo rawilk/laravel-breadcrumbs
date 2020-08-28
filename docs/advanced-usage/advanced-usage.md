@@ -36,7 +36,8 @@ template, like this:
 </li>
 ```
 
->{.tip} Do not use keys like `title` or `url` as they will be overwritten.
+{.tip}
+> Do not use keys like `title` or `url` as they will be overwritten.
 
 ## Getting the Current Page Breadcrumb
 

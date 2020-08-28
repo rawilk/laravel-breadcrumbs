@@ -72,7 +72,8 @@ use `Breadcrumbs::view()` to render the `breadcrumbs::json-ld` template in addit
 </html>
 ```
 
->{.tip} **Note:** If you use [Laravel Page Speed](https://github.com/renatomarinho/laravel-page-speed) you may need to [disable the `TrimUrls` middleware](https://github.com/renatomarinho/laravel-page-speed/issues/66).
+{.tip}
+> **Note:** If you use [Laravel Page Speed](https://github.com/renatomarinho/laravel-page-speed) you may need to [disable the `TrimUrls` middleware](https://github.com/renatomarinho/laravel-page-speed/issues/66).
 
 To specify an image, add it to the `$data` parameter in `push()`:
 

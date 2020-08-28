@@ -39,7 +39,8 @@ Breadcrumbs::for(
 );
 ```
 
->{.tip} See [Defining Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/defining-breadcrumbs) for more details.
+{.tip} 
+> See [Defining Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/defining-breadcrumbs) for more details.
 
 ## Choose a Template
 
@@ -60,7 +61,8 @@ Other predefined templates include:
 - `breadcrumbs::json-ld` - [JSON-LD Structured Data](https://developers.google.com/search/docs/data-types/breadcrumbs) (`<script />` tag, no visible output)
 - The path to a custom view: e.g. `partials.breadcrumbs`
 
->{.tip} See [Custom Templates](/docs/laravel-breadcrumbs/v1/usage/custom-templates) for more details.
+{.tip}
+> See [Custom Templates](/docs/laravel-breadcrumbs/v1/usage/custom-templates) for more details.
 
 ## Render the Breadcrumbs
 
@@ -72,6 +74,7 @@ Finally, call `Breadcrumbs::render()` in the view for each page, passing it the 
 {{ Breadcrumbs::render('category', $category) }}
 ```
 
->{.tip} See [Outputting Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/outputting-breadcrumbs) for other output options, and see
+{.tip}
+> See [Outputting Breadcrumbs](/docs/laravel-breadcrumbs/v1/usage/outputting-breadcrumbs) for other output options, and see
 > [Route-Bound Breadcrumbs](/docs/laravel-breadcrumbs/v1/advanced-usage/route-bound-breadcrumbs) for a way to link
 > breadcrumb names to route names automatically.

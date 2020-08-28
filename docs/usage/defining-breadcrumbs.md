@@ -17,9 +17,11 @@ use Rawilk\Breadcrumbs\Support\Generator;
 Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 ```
 
->{.tip} In the example above, a [PHP 7.4 arrow function](https://www.php.net/manual/en/functions.arrow.php) is used, but you are free to use regular style closures as well.
+{.tip}
+> In the example above, a [PHP 7.4 arrow function](https://www.php.net/manual/en/functions.arrow.php) is used, but you are free to use regular style closures as well.
 
->{.tip} In the example above, `$trail` is type-hinted to `Rawilk\Breadcrumbs\Support\Generator`, but you are free to use your own generator class if you want (be sure to define it in the config), and you also don't need to type-hint it if you don't want to.
+{.tip}
+> In the example above, `$trail` is type-hinted to `Rawilk\Breadcrumbs\Support\Generator`, but you are free to use your own generator class if you want (be sure to define it in the config), and you also don't need to type-hint it if you don't want to.
 
 When you call `$trail->push($title, $url)` inside the closure, it adds a breadcrumb link for the page.
 
@@ -52,7 +54,8 @@ use Rawilk\Breadcrumbs\Support\Generator;
 Breadcrumbs::for('blog', fn (Generator $trail) => $trail->parent('home')->push('Blog', route('blog')));
 ```
 
->{.tip} It works by calling the closure for the `home` breadcrumb defined above via `parent()`.
+{.tip}
+> It works by calling the closure for the `home` breadcrumb defined above via `parent()`.
 
 It would be rendered like this:
 
@@ -64,7 +67,8 @@ And results in this output:
 
 > [Home](#) / Blog
 
->{.tip} **Note:** The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
+{.tip}
+> **Note:** The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
 > You can override this by creating your own template or overriding the package's pre-defined templates. See
 > [Custom Templates](/docs/laravel-breadcrumbs/v1/usage/custom-templates) for more details.
 
@@ -86,7 +90,8 @@ The output from this would be:
 
 > [Home](#) / [Blog](#) / Post Title
 
->{.tip} **Tip:** You can pass in multiple parameters if necessary.
+{.tip}
+> **Tip:** You can pass in multiple parameters if necessary.
 
 ## Nested Categories
 

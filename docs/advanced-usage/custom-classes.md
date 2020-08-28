@@ -12,7 +12,8 @@ update the `config/breadcrumbs.php` file with the new class name.
 'generator_class' => \Rawilk\Breadcrumbs\Support\Generator::class,
 ```
 
->{.tip} **Note:** Anything that's not part of the public API may change between releases, so I suggest you write unit tests to ensure it doesn't break when upgrading.
+{.tip}
+> **Note:** Anything that's not part of the public API may change between releases, so I suggest you write unit tests to ensure it doesn't break when upgrading.
 
 If you choose to use your own `generator_class`, your class must implement the `Rawilk\Breadcrumbs\Contracts\Generator` contract. Here is what the contract
 looks like:
