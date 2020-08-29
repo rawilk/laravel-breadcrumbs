@@ -3,6 +3,8 @@ title: Defining Breadcrumbs
 sort: 2
 ---
 
+## Introduction
+
 Breadcrumbs will usually correspond to actions or types of a page. For each breadcrumb, you specify a name, the breadcrumb title
 and the URL to link it to. Since these are likely to change dynamically, you do this in a closure, and pass in any variables you
 need into the closure.

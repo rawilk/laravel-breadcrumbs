@@ -3,6 +3,8 @@ title: Outputting Breadcrumbs
 sort: 4
 ---
 
+## Introduction
+
 Call `Breadcrumbs::render()` in the view for each page, passing it the name of the breadcrumb to use an any additional parameters.
 
 ## With Blade

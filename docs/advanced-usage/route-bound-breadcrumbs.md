@@ -3,6 +3,8 @@ title: Route-Bound Breadcrumbs
 sort: 2
 ---
 
+## Introduction
+
 In normal usage you must call `Breadcrumbs::render($name, ...$params)` to render the breadcrumbs on every page.
 If you prefer, you can name your breadcrumbs the same as you name your routes and avoid this duplication.
 
