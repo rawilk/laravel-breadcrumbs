@@ -3,6 +3,8 @@ title: Installation
 sort: 3
 ---
 
+## Installation
+
 laravel-breadcrumbs can be installed via composer:
 
 ```bash
