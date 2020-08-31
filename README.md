@@ -101,7 +101,7 @@ return [
 ```
 
 ## Documentation
-For more documentation, please visit: https://docs.randallwilk.dev/laravel-breadcrumbs
+For more documentation, please visit: https://randallwilk.dev/docs/laravel-breadcrumbs
 
 ## Testing
 
