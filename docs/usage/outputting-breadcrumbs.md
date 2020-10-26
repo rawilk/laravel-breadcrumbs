@@ -87,3 +87,23 @@ Breadcrumbs::for('post', function (Generator $trail, $post) {
 ```
 
 If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/v1/usage/custom-templates).
+
+## Blade Component
+
+As of version `1.1.0`, you can use the provided `<x-breadcrumbs />` blade component to render
+your breadcrumbs. By default, it uses the current route name to determine if there are breadcrumbs
+that exist to render. You can manually specify which breadcrumbs you want rendered as well:
+
+```html
+<x-breadcrumbs breadcrumbs="your.breadcrumbs.route_name" />
+
+<!-- with parameters -->
+<x-breadcrumbs breadcrumbs="your.breadcrumbs.route_name" :params="[$user]" />
+```
+
+You can also pass in `false` as the `breadcrumbs` attribute if you need to disable the rendering of
+the breadcrumbs altogether:
+
+```html
+<x-breadcrumbs :breadcrumbs="false" />
+```
