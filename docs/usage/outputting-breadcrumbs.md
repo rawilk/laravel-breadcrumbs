@@ -90,7 +90,7 @@ If you prefer to use Microdata or RDFa, you will need to create a [custom templa
 
 ## Blade Component
 
-As of version `1.1.0`, you can use the provided `<x-breadcrumbs />` blade component to render
+As of version `2.0.0`, you can use the provided `<x-breadcrumbs />` blade component to render
 your breadcrumbs. By default, it uses the current route name to determine if there are breadcrumbs
 that exist to render. You can manually specify which breadcrumbs you want rendered as well:
 
