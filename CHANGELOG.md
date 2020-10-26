@@ -2,7 +2,10 @@
 
 All notable changes to `laravel-breadcrumbs` will be documented in this file
 
-## 1.1.0 - 2020-10-26
+## 2.0.0 - 2020-10-26
+### Breaking changes:
+- Drop support for Laravel v6
+
 ### Added
 - Add `<x-breadcrumbs />` blade component for convenient rendering
 
