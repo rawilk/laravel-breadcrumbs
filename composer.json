@@ -22,9 +22,9 @@
     "require": {
         "php": "^8.0",
         "facade/ignition-contracts": "^1.0",
-        "illuminate/contracts": "^8.16",
-        "illuminate/routing": "^8.16",
-        "illuminate/support": "^8.16"
+        "illuminate/contracts": "^8.16.1",
+        "illuminate/routing": "^8.16.1",
+        "illuminate/support": "^8.16.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
