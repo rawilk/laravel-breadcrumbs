@@ -9,6 +9,7 @@ use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
 use Facade\IgnitionContracts\Solution;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\Pure;
 use Rawilk\Breadcrumbs\Concerns\GetsConfigBreadcrumbFiles;
 use Rawilk\Breadcrumbs\Support\IgnitionLinks;
 
@@ -16,13 +17,10 @@ class BreadcrumbAlreadyDefined extends Exception implements ProvidesSolution
 {
     use GetsConfigBreadcrumbFiles;
 
-    protected string $name;
-
-    public function __construct(string $name)
+    #[Pure]
+    public function __construct(protected string $name)
     {
         parent::__construct("There is already a breadcrumb named '{$name}' defined.");
-
-        $this->name = $name;
     }
 
     public function getSolution(): Solution

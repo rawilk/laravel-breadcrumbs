@@ -22,13 +22,13 @@
     "require": {
         "php": "^8.0",
         "facade/ignition-contracts": "^1.0",
-        "illuminate/contracts": "^7.0|^8.0",
-        "illuminate/routing": "^7.0|^8.0",
-        "illuminate/support": "^7.0|^8.0"
+        "illuminate/contracts": "^8.0",
+        "illuminate/routing": "^8.0",
+        "illuminate/support": "^8.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
-        "orchestra/testbench": "^5.0|^6.0",
+        "orchestra/testbench": "^6.4",
         "phpunit/phpunit": "^9.4",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "psalm/plugin-laravel": "^1.4",
