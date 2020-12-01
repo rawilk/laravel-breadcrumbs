@@ -5,7 +5,7 @@ sort: 2
 
 ## General Requirements
 - PHP **7.4** or greater
-- Laravel **6.0** or greater
+- Laravel **7.0** or greater
 
 ## Version Matrix
 | Laravel | Minimum Version | Maximum Version |
