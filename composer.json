@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
+        "doctrine/dbal": "^2.12",
         "orchestra/testbench": "^6.5",
         "phpunit/phpunit": "^9.4.4",
         "spatie/phpunit-snapshot-assertions": "^4.2",
