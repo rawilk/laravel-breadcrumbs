@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-breadcrumbs` will be documented in this file
 
+## 3.0.0 - 2020-12-01
+### Breaking changes:
+- Drop support for Laravel v7
+- Drop support for php 7
+
+### Updated
+- Add support for php 8
+- Update some of code base to use php 8 features
+
 ## 2.0.0 - 2020-10-26
 ### Breaking changes:
 - Drop support for Laravel v6
