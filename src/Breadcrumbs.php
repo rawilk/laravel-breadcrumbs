@@ -122,7 +122,7 @@ class Breadcrumbs
 
     public function current(): ?object
     {
-        return $this->generate()?->where('current', '!==', false)->last();
+        return $this->generate()->where('current', '!==', false)->last();
     }
 
     /**

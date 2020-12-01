@@ -14,4 +14,9 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <!-- Ignored because #[Pure] is a PHPStorm Attribute -->
+        <UndefinedAttributeClass errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>
