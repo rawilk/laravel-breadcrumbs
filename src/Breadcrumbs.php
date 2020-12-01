@@ -18,19 +18,15 @@ class Breadcrumbs
 {
     use Macroable;
 
-    protected Generator $generator;
-    protected Router $router;
-    protected ViewFactory $viewFactory;
     protected array $callbacks = [];
     protected array $before = [];
     protected ?array $route = null;
 
-    public function __construct(Generator $generator, Router $router, ViewFactory $viewFactory)
-    {
-        $this->generator = $generator;
-        $this->router = $router;
-        $this->viewFactory = $viewFactory;
-    }
+    public function __construct(
+        protected Generator $generator,
+        protected Router $router,
+        protected ViewFactory $viewFactory
+    ) {}
 
     /**
      * Register a breadcrumb-generating callback for a page.
@@ -64,7 +60,7 @@ class Breadcrumbs
         if (is_null($name)) {
             try {
                 [$name] = $this->getCurrentRoute();
-            } catch (UnnamedRoute $e) {
+            } catch (UnnamedRoute) {
                 return false;
             }
         }
@@ -126,7 +122,7 @@ class Breadcrumbs
 
     public function current(): ?object
     {
-        return $this->generate()->where('current', '!==', false)->last();
+        return $this->generate()?->where('current', '!==', false)->last();
     }
 
     /**

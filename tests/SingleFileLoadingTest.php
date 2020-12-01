@@ -11,7 +11,7 @@ class SingleFileLoadingTest extends TestCase
 {
     use AssertsSnapshots;
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
 

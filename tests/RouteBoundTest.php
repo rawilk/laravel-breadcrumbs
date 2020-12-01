@@ -27,8 +27,7 @@ class RouteBoundTest extends TestCase
     /** @test */
     public function it_renders_route_bound_breadcrumbs(): void
     {
-        Route::get('/', function () {
-        })->name('home');
+        Route::get('/', static function () {})->name('home');
 
         Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 

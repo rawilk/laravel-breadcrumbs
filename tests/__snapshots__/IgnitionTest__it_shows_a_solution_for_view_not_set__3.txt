@@ -1,2 +1,2 @@
-'Choosing A Breadcrumbs Template (view)': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v1/usage/basic-usage#choose-a-template'
-'Laravel Breadcrumbs Documentation': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v1/introduction'
+'Choosing A Breadcrumbs Template (view)': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/usage/basic-usage#choose-a-template'
+'Laravel Breadcrumbs Documentation': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/introduction'

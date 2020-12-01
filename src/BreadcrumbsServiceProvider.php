@@ -42,7 +42,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrablePr
 
     protected function bootBladeComponents(): void
     {
-        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+        $this->callAfterResolving(BladeCompiler::class, static function (BladeCompiler $blade) {
             $blade->component('breadcrumbs::components.breadcrumbs', 'breadcrumbs');
         });
     }

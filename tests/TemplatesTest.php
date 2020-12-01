@@ -38,7 +38,7 @@ class TemplatesTest extends TestCase
      * @dataProvider viewProvider
      * @param string $view
      */
-    public function it_renders_each_package_template_view($view): void
+    public function it_renders_each_package_template_view(string $view): void
     {
         $html = Breadcrumbs::view("breadcrumbs::{$view}", 'category', $this->category);
 

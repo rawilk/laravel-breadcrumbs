@@ -16,15 +16,11 @@ use Rawilk\Breadcrumbs\Support\IgnitionLinks;
 
 class UnnamedRoute extends Exception implements ProvidesSolution
 {
-    protected Route $route;
-
-    public function __construct(Route $route)
+    public function __construct(protected Route $route)
     {
         $uri = Arr::first($route->methods()) . ' /' . ltrim($route->uri(), '/');
 
         parent::__construct("The current route ({$uri}) is not named.");
-
-        $this->route = $route;
     }
 
     public function getSolution(): Solution
