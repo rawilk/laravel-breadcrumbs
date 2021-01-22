@@ -19,11 +19,9 @@ use Rawilk\Breadcrumbs\Support\Generator;
 Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 ```
 
-{.tip}
-> In the example above, a [PHP 7.4 arrow function](https://www.php.net/manual/en/functions.arrow.php) is used, but you are free to use regular style closures as well.
+> {note} In the example above, a [PHP 7.4 arrow function](https://www.php.net/manual/en/functions.arrow.php) is used, but you are free to use regular style closures as well.
 
-{.tip}
-> In the example above, `$trail` is type-hinted to `Rawilk\Breadcrumbs\Support\Generator`, but you are free to use your own generator class if you want (be sure to define it in the config), and you also don't need to type-hint it if you don't want to.
+> {tip} In the example above, `$trail` is type-hinted to `Rawilk\Breadcrumbs\Support\Generator`, but you are free to use your own generator class if you want (be sure to define it in the config), and you also don't need to type-hint it if you don't want to.
 
 When you call `$trail->push($title, $url)` inside the closure, it adds a breadcrumb link for the page.
 
@@ -43,6 +41,7 @@ This example would be rendered like this:
 
 And results in this output:
 
+{.ignore}
 > Home
 
 ## Parent Links
@@ -56,8 +55,7 @@ use Rawilk\Breadcrumbs\Support\Generator;
 Breadcrumbs::for('blog', fn (Generator $trail) => $trail->parent('home')->push('Blog', route('blog')));
 ```
 
-{.tip}
-> It works by calling the closure for the `home` breadcrumb defined above via `parent()`.
+> {note} It works by calling the closure for the `home` breadcrumb defined above via `parent()`.
 
 It would be rendered like this:
 
@@ -67,10 +65,10 @@ It would be rendered like this:
 
 And results in this output:
 
+{.ignore}
 > [Home](#) / Blog
 
-{.tip}
-> **Note:** The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
+> {note} The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
 > You can override this by creating your own template or overriding the package's pre-defined templates. See
 > [Custom Templates](/docs/laravel-breadcrumbs/v1/usage/custom-templates) for more details.
 
@@ -90,10 +88,10 @@ The `$post` object (usually an [Eloquent](https://laravel.com/docs/7.x/eloquent)
 
 The output from this would be:
 
+{.ignore}
 > [Home](#) / [Blog](#) / Post Title
 
-{.tip}
-> **Tip:** You can pass in multiple parameters if necessary.
+> {tip} You can pass in multiple parameters if necessary.
 
 ## Nested Categories
 
@@ -133,4 +131,5 @@ Both would be rendered like this:
 
 The result could end up like this:
 
+{.ignore}
 > [Home](#) / [Blog](#) / [Grandparent Category](#) / [Parent Category](#) / Category Title
