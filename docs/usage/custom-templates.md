@@ -38,7 +38,7 @@ Each breadcrumb is an object with the following keys:
 
 - `title` - The breadcrumb title
 - `url` - The breadcrumb URL, or `null` if none was given
-- Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/v1/advanced-usage/advanced-usage#custom-data))
+- Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/v3/advanced-usage/advanced-usage#custom-data))
 
 ## Update the Config
 

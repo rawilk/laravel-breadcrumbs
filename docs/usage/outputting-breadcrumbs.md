@@ -86,7 +86,7 @@ Breadcrumbs::for('post', function (Generator $trail, $post) {
 });
 ```
 
-If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/v1/usage/custom-templates).
+If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/v3/usage/custom-templates).
 
 ## Blade Component
 
