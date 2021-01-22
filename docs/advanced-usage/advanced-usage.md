@@ -36,8 +36,7 @@ template, like this:
 </li>
 ```
 
-{.tip}
-> Do not use keys like `title` or `url` as they will be overwritten.
+> {note} Do not use keys like `title` or `url` as they will be overwritten.
 
 ## Getting the Current Page Breadcrumb
 
@@ -70,7 +69,7 @@ Breadcrumbs::for('post', function (Generator $trail, Post $post) {
 ```
 
 ## Switching Views at Runtime
-You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/v1/usage/basic-usage#choose-a-template):
+You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/v2/usage/basic-usage#choose-a-template):
 
 ```html
 {{ Breadcrumbs::view('partials.breadcrumbs2', 'category', $category) }}
