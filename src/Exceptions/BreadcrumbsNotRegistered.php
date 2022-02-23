@@ -11,7 +11,6 @@ use Facade\IgnitionContracts\Solution;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\Pure;
 use Rawilk\Breadcrumbs\Concerns\GetsConfigBreadcrumbFiles;
 use Rawilk\Breadcrumbs\Support\IgnitionLinks;
 
@@ -21,7 +20,6 @@ class BreadcrumbsNotRegistered extends Exception implements ProvidesSolution
 
     protected bool $isRouteBound = false;
 
-    #[Pure]
     public function __construct(protected string $name)
     {
         parent::__construct("No breadcrumbs defined for '{$name}'.");
