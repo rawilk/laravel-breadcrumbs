@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-breadcrumbs` will be documented in this file
 
+## 3.0.1 - 2022-02-23
+### Updated
+- Add Laravel 9.* support
+- Add PHP 8.1 support
+
 ## 3.0.0 - 2020-12-01
 ### Breaking changes:
 - Drop support for Laravel v7
