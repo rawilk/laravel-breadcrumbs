@@ -26,7 +26,8 @@ class Breadcrumbs
         protected Generator $generator,
         protected Router $router,
         protected ViewFactory $viewFactory
-    ) {}
+    ) {
+    }
 
     /**
      * Register a breadcrumb-generating callback for a page.
