@@ -32,5 +32,5 @@ Now in a view somewhere, enter this:
 
 ```html
 <!-- will render a partial with links for Home > About -->
-{{ Breadcrumbs::render('about') }}
+{!! Breadcrumbs::render('about') !!}
 ```

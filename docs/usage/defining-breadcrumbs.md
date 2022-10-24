@@ -36,7 +36,7 @@ For generating a URL, you can use any of the standard Laravel URL-generation met
 This example would be rendered like this:
 
 ```html
-{{ Breadcrumbs::render('home') }}
+{!! Breadcrumbs::render('home') !!}
 ```
 
 And results in this output:
@@ -60,7 +60,7 @@ Breadcrumbs::for('blog', fn (Generator $trail) => $trail->parent('home')->push('
 It would be rendered like this:
 
 ```html
-{{ Breadcrumbs::render('blog') }}
+{!! Breadcrumbs::render('blog') !!}
 ```
 
 And results in this output:
@@ -83,7 +83,7 @@ Breadcrumbs::for('post', fn (Generator $trail, $post) => $trail->parent('blog')-
 The `$post` object (usually an [Eloquent](https://laravel.com/docs/7.x/eloquent) model, but could be anything) would simply be passed in from the view:
 
 ```html
-{{ Breadcrumbs::render('post', $post) }}
+{!! Breadcrumbs::render('post', $post) !!}
 ```
 
 The output from this would be:
@@ -126,7 +126,7 @@ Breadcrumbs::for('category', function (Generator $trail, $category) {
 Both would be rendered like this:
 
 ```html
-{{ Breadcrumbs::render('category', $category) }}
+{!! Breadcrumbs::render('category', $category) !!}
 ```
 
 The result could end up like this:

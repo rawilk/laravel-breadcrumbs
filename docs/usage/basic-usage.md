@@ -67,9 +67,9 @@ Other predefined templates include:
 Finally, call `Breadcrumbs::render()` in the view for each page, passing it the name of the breadcrumb to use and any additional parameters you need.
 
 ```html
-{{ Breadcrumbs::render('home') }}
+{!! Breadcrumbs::render('home') !!}
 
-{{ Breadcrumbs::render('category', $category) }}
+{!! Breadcrumbs::render('category', $category) !!}
 ```
 
 > {tip} See [Outputting Breadcrumbs](/docs/laravel-breadcrumbs/v3/usage/outputting-breadcrumbs) for other output options, and see
