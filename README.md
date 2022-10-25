@@ -24,7 +24,7 @@ Breadcrumbs::for('about', function (Generator $trail)  {
 
 ```html
 <!-- will render a view with links for Home > About -->
-<nav>{{ Breadcrumbs::render('about') }}</nav>
+<nav>{!! Breadcrumbs::render('about') !!}</nav>
 ```
 
 ## Installation

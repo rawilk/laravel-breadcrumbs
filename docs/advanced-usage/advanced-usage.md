@@ -69,10 +69,10 @@ Breadcrumbs::for('post', function (Generator $trail, Post $post) {
 ```
 
 ## Switching Views at Runtime
-You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/v2/usage/basic-usage#choose-a-template):
+You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/{version}/usage/basic-usage#choose-a-template):
 
 ```html
-{{ Breadcrumbs::view('partials.breadcrumbs2', 'category', $category) }}
+{!! Breadcrumbs::view('partials.breadcrumbs2', 'category', $category) !!}
 ```
 
 Or you can override the config setting to affect all future `render()` calls:
@@ -82,7 +82,7 @@ Config::set('breadcrumbs.view', 'partials.breadcrumbs2');
 ```
 
 ```html
-{{ Breadcrumbs::render('category', $category) }}
+{!! Breadcrumbs::render('category', $category) !!}
 ```
 
 Or you could call `Breadcrumbs::generate()` to get the breadcrumbs collection and load the view manually:

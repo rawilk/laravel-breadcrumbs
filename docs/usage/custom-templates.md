@@ -27,7 +27,7 @@ To customize the HTML, create your own view file (e.g. `resources/views/partials
 @endif
 ```
 
-> {tip} See the [views/ directory](https://github.com/rawilk/laravel-breadcrumbs/tree/master/resources/views) for the built-in templates.
+> {tip} See the [views/ directory](https://github.com/rawilk/laravel-breadcrumbs/tree/{branch}/resources/views) for the built-in templates.
 
 ### View Data
 
@@ -37,7 +37,7 @@ Each breadcrumb is an object with the following keys:
 
 - `title` - The breadcrumb title
 - `url` - The breadcrumb URL, or `null` if none was given
-- Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/v2/advanced-usage/advanced-usage#custom-data))
+- Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/{version}/advanced-usage/advanced-usage#custom-data))
 
 ## Update the Config
 

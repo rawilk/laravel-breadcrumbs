@@ -12,13 +12,13 @@ Call `Breadcrumbs::render()` in the view for each page, passing it the name of t
 In the page (e.g. `resources/views/home.blade.php`):
 
 ```html
-{{ Breadcrumbs::render('home') }}
+{!! Breadcrumbs::render('home') !!}
 ```
 
 Or with a parameter:
 
 ```html
-{{ Breadcrumbs::render('category', $category) }}
+{!! Breadcrumbs::render('category', $category) !!}
 ```
 
 ## With Blade Layouts and @section
@@ -29,7 +29,7 @@ In the page (e.g. `resources/views/home.blade.php`):
 @extends('layouts.master')
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('home') }}
+    {!! Breadcrumbs::render('home') !!}
 @endsection
 ```
 
@@ -63,12 +63,12 @@ use `Breadcrumbs::view()` to render the `breadcrumbs::json-ld` template in addit
 <html>
     <head>
         ...
-        {{ Breadcrumbs::view('breadcrumbs::json-ld', 'category', $category) }}
+        {!! Breadcrumbs::view('breadcrumbs::json-ld', 'category', $category) !!}
         ...
     </head>
     <body>
         ...
-        {{ Breadcrumbs::render('category', $category) }}
+        {!! Breadcrumbs::render('category', $category) !!}
         ...
     </body>
 </html>
@@ -85,7 +85,7 @@ Breadcrumbs::for('post', function (Generator $trail, $post) {
 });
 ```
 
-If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/v2/usage/custom-templates).
+If you prefer to use Microdata or RDFa, you will need to create a [custom template](/docs/laravel-breadcrumbs/{version}/usage/custom-templates).
 
 ## Blade Component
 
