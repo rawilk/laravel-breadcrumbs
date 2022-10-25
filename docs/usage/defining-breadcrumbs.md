@@ -70,7 +70,7 @@ And results in this output:
 
 > {note} The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
 > You can override this by creating your own template or overriding the package's pre-defined templates. See
-> [Custom Templates](/docs/laravel-breadcrumbs/v3/usage/custom-templates) for more details.
+> [Custom Templates](/docs/laravel-breadcrumbs/{version}/usage/custom-templates) for more details.
 
 ## Dynamic Titles and Links
 
