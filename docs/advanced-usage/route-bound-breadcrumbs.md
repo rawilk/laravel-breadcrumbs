@@ -49,7 +49,7 @@ Breadcrumbs::for('errors.404', fn (Generator $trail) => $trail->parent('home')->
 Call `Breadcrumbs::render()` with no parameters in your layout file (e.g. `resources/views/app.blade.php`):
 
 ```html
-{{ Breadcrumbs::render() }}
+{!! Breadcrumbs::render() !!}
 ```
 
 This will automatically output breadcrumbs corresponding to the current route. The same applies to `Breadcrumbs::generate()`:
@@ -61,7 +61,7 @@ $breadcrumbs = Breadcrumbs::generate();
 And for `Breadcrumbs::view()`:
 
 ```html
-{{ Breadcrumbs::view('breadcrumbs::json-ld') }}
+{!! Breadcrumbs::view('breadcrumbs::json-ld') !!}
 ```
 
 ## Route Binding Exceptions
