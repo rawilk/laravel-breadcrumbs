@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rawilk\Breadcrumbs\Support;
 
+/** @internal */
 class IgnitionLinks
 {
     /** @var string */
