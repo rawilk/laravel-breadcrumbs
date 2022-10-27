@@ -39,7 +39,7 @@ composer require rawilk/laravel-breadcrumbs
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --tag="webauthn-config"
+php artisan vendor:publish --tag="breadcrumbs-config"
 ```
 
 You can view the default configuration here: https://github.com/rawilk/laravel-breadcrumbs/blob/main/config/breadcrumbs.php
