@@ -69,7 +69,7 @@ class Breadcrumbs
         return isset($this->callbacks[$name]);
     }
 
-    public function generate(string $name = null, ...$params): Collection
+    public function generate(?string $name = null, ...$params): Collection
     {
         $originalName = $name;
 
@@ -103,14 +103,14 @@ class Breadcrumbs
         }
     }
 
-    public function view(string $view, string $name = null, ...$params): string
+    public function view(string $view, ?string $name = null, ...$params): string
     {
         $breadcrumbs = $this->generate($name, ...$params);
 
         return $this->viewFactory->make($view, compact('breadcrumbs'))->render();
     }
 
-    public function render(string $name = null, ...$params): string
+    public function render(?string $name = null, ...$params): string
     {
         $view = config('breadcrumbs.view');
 
