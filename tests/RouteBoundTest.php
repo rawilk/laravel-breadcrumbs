@@ -2,211 +2,193 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
-use Rawilk\Breadcrumbs\Tests\Concerns\NeedsDatabase;
-use Rawilk\Breadcrumbs\Tests\Http\Controllers\PostsController;
-use Rawilk\Breadcrumbs\Tests\Models\Post;
+use Rawilk\Breadcrumbs\Tests\Fixtures\app\Http\Controllers\PostsController;
+use Rawilk\Breadcrumbs\Tests\Fixtures\app\Models\Post;
+use Sinnbeck\DomAssertions\Asserts\AssertElement;
+use function Pest\Laravel\get;
 
-class RouteBoundTest extends TestCase
+beforeEach(function () {
+    $this->domain = 'http://localhost';
+
+    createPostsTable();
+    createPost();
+});
+
+afterEach(function () {
+    dropPostsTable();
+});
+
+it('renders route bound breadcrumbs', function () {
+    defineBreadcrumbs();
+
+    Route::get('/', fn () => '')->name('home');
+
+    // Home > [Post]
+    Route::get('/post/{id}', fn () => Breadcrumbs::render())->name('post');
+
+    get('/post/1')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 2)
+                ->contains('li.current', 1)
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Post 1')
+                        ->doesntContain('a');
+                });
+        });
+});
+
+it('generates route bound breadcrumbs', function () {
+    defineBreadcrumbs();
+
+    Route::get('/', fn () => '')->name('home');
+
+    // Home > [Post]
+    Route::get('/post/{id}', fn () => Breadcrumbs::generate())->name('post');
+
+    $breadcrumbs = collect(json_decode(get('/post/1')->getContent(), true))
+        ->map(fn (array $breadcrumb) => (object) $breadcrumb);
+
+    expect($breadcrumbs)->count()->toBe(2)
+        ->and($breadcrumbs[0]->title)->toBe('Home')
+        ->and($breadcrumbs[0]->url)->toBe($this->domain)
+        ->and($breadcrumbs[1]->title)->toBe('Post 1')
+        ->and($breadcrumbs[1]->url)->toBe("{$this->domain}/post/1");
+});
+
+it('can render route bound breadcrumbs with custom views', function () {
+    defineBreadcrumbs();
+
+    Route::get('/', fn () => '')->name('home');
+
+    // Home > [Post]
+    Route::get('/post/{id}', fn () => Breadcrumbs::view('breadcrumbs2'))->name('post');
+
+    get('/post/1')
+        ->assertElementExists('ul.custom-view', function (AssertElement $ul) {
+            $ul->contains('li', 2)
+                ->contains('li.current', 1)
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Post 1')
+                        ->doesntContain('a');
+                });
+        });
+});
+
+it('can check if a route bound breadcrumb exists', function () {
+    $exists = false;
+
+    Breadcrumbs::for('exists', fn () => '');
+    Route::get('/exists', function () use (&$exists) {
+        $exists = Breadcrumbs::exists();
+    })->name('exists');
+
+    get('/exists');
+    expect($exists)->toBeTrue();
+
+    $otherExists = true;
+    Route::get('/not-exists', function () use (&$otherExists) {
+        $otherExists = Breadcrumbs::exists();
+    })->name('not-exists');
+
+    get('/not-exists');
+    expect($otherExists)->toBeFalse();
+
+    // Unnamed routes should also be able to be checked and not trigger an exception.
+    $unnamedExists = true;
+
+    Route::get('/unnamed', function () use (&$unnamedExists) {
+        $unnamedExists = Breadcrumbs::exists();
+    });
+
+    get('/unnamed');
+    expect($unnamedExists)->toBeFalse();
+});
+
+it('can handle implicit model binding', function () {
+    Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
+    Breadcrumbs::for('post', fn (Generator $trail, $post) => $trail->parent('home')->push($post->title, route('post', $post)));
+
+    Route::get('/', fn () => '')->name('home');
+    Route::get('/post/{post}', fn (Post $post) => Breadcrumbs::render())->middleware(SubstituteBindings::class)->name('post');
+
+    get('/post/1')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 2)
+                ->contains('li.current', 1)
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Post 1')
+                        ->doesntContain('a');
+                });
+        });
+});
+
+it('can handle explicit model binding', function () {
+    Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
+    Breadcrumbs::for('post', fn (Generator $trail, Post $post) => $trail->parent('home')->push($post->title, route('post', $post)));
+
+    Route::get('/', fn () => '')->name('home');
+    Route::get('/post/{post}', fn (Post $post) => Breadcrumbs::render())->name('post')->middleware(SubstituteBindings::class);
+
+    get('/post/1')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 2)
+                ->contains('li.current', 1)
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Post 1')
+                        ->doesntContain('a');
+                });
+        });
+});
+
+it('can handle resourceful controllers', function () {
+    Route::middleware(SubstituteBindings::class)->resource('post', PostsController::class);
+
+    Breadcrumbs::for('post.index', fn (Generator $trail) => $trail->push('Posts', route('post.index')));
+
+    // Posts > Upload Post
+    Breadcrumbs::for('post.create', fn (Generator $trail) => $trail->parent('post.index')->push('New Post', route('post.create')));
+
+    // Posts > [Post Name]
+    Breadcrumbs::for('post.show', fn (Generator $trail, Post $post) => $trail->parent('post.index')->push($post->title, route('post.show', $post->id)));
+
+    // Posts > [Post Name] > Edit Post
+    Breadcrumbs::for('post.edit', fn (Generator $trail, Post $post) => $trail->parent('post.show', $post)->push('Edit Post', route('post.edit', $post->id)));
+
+    get('/post/1/edit')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 3)
+                ->contains('li.current', 1)
+                ->find('li:nth-of-type(1)', function (AssertElement $li) {
+                    $li->contains('a', [
+                        'href' => "{$this->domain}/post",
+                        'text' => 'Posts',
+                    ]);
+                })
+                ->find('li:nth-of-type(2)', function (AssertElement $li) {
+                    $li->contains('a', [
+                        'href' => "{$this->domain}/post/1",
+                        'text' => 'Post 1',
+                    ]);
+                })
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Edit Post')
+                        ->doesntContain('a');
+                });
+        });
+});
+
+// Helpers...
+function defineBreadcrumbs(): void
 {
-    use AssertsSnapshots, NeedsDatabase;
+    Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    Breadcrumbs::for('post', function (Generator $trail, $id) {
+        $post = Post::findOrFail($id);
 
-        $this->setUpDatabase($this->app);
-    }
-
-    /** @test */
-    public function it_renders_route_bound_breadcrumbs(): void
-    {
-        Route::get('/', static function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        // Home > [Post]
-        Route::get('/post/{id}', fn () => Breadcrumbs::render())->name('post');
-
-        Breadcrumbs::for('post', function (Generator $trail, $id) {
-            $post = Post::findOrFail($id);
-
-            $trail->parent('home')->push($post->title, route('post', $post));
-        });
-
-        $html = $this->get('/post/1')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_generates_route_bound_breadcrumbs(): void
-    {
-        Route::get('/', function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        $breadcrumbs = null;
-
-        // Home > [Post]
-        Route::get('/post/{id}', function () use (&$breadcrumbs) {
-            $breadcrumbs = Breadcrumbs::generate();
-        })->name('post');
-
-        Breadcrumbs::for('post', function (Generator $trail, $id) {
-            $post = Post::findOrFail($id);
-
-            $trail->parent('home')->push($post->title, route('post', $post));
-        });
-
-        $this->get('/post/1');
-
-        self::assertCount(2, $breadcrumbs);
-
-        self::assertSame('Home', $breadcrumbs[0]->title);
-        self::assertSame('http://localhost', $breadcrumbs[0]->url);
-
-        self::assertSame('Post 1', $breadcrumbs[1]->title);
-        self::assertSame('http://localhost/post/1', $breadcrumbs[1]->url);
-    }
-
-    /** @test */
-    public function it_can_render_route_bound_breadcrumbs_with_custom_views(): void
-    {
-        Route::get('/', function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        // Home > [Post]
-        Route::get('/post/{id}', fn () => Breadcrumbs::view('breadcrumbs2'))->name('post');
-
-        Breadcrumbs::for('post', function (Generator $trail, $id) {
-            $post = Post::findOrFail($id);
-
-            $trail->parent('home')->push($post->title, route('post', $post));
-        });
-
-        $html = $this->get('/post/1')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_can_check_if_a_route_bound_breadcrumb_exists(): void
-    {
-        $exists1 = false;
-
-        Breadcrumbs::for('exists', function () {
-        });
-
-        Route::get('/exists', function () use (&$exists1) {
-            $exists1 = Breadcrumbs::exists();
-        })->name('exists');
-
-        $this->get('/exists');
-        self::assertTrue($exists1);
-
-        $exists2 = true;
-
-        Route::get('/not-exists', function () use (&$exists2) {
-            $exists2 = Breadcrumbs::exists();
-        })->name('not-exists');
-
-        $this->get('not-exists');
-        self::assertFalse($exists2);
-
-        // Unnamed routes should also be able to be checked and not trigger an exception.
-        $exists3 = true;
-
-        Route::get('/unnamed', function () use (&$exists3) {
-            $exists3 = Breadcrumbs::exists();
-        });
-
-        $this->get('/unnamed');
-        self::assertFalse($exists3);
-    }
-
-    /** @test */
-    public function the_404_page_template_can_have_breadcrumbs(): void
-    {
-        Route::get('/', function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        Breadcrumbs::for('errors.404', fn (Generator $trail) => $trail->parent('home')->push('Not Found'));
-
-        $html = $this->withExceptionHandling()->get('/does-not-exist')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_can_handle_explicit_model_binding(): void
-    {
-        Route::get('/', function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        // Home > [Post]
-        Route::model('post', Post::class);
-        Route::get('/post/{post}', fn () => Breadcrumbs::render())->name('post')->middleware(SubstituteBindings::class);
-
-        Breadcrumbs::for('post', fn (Generator $trail, Post $post) => $trail->parent('home')->push($post->title, route('post', $post)));
-
-        $html = $this->get('/post/1')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_can_handle_implicit_model_binding(): void
-    {
-        Route::get('/', function () {
-        })->name('home');
-
-        Breadcrumbs::for('home', fn (Generator $trail) => $trail->push('Home', route('home')));
-
-        // Home > [Post]
-        Route::get('/post/{post}', function (Post $post) {
-            return Breadcrumbs::render();
-        })->name('post')->middleware(SubstituteBindings::class);
-
-        Breadcrumbs::for('post', fn (Generator $trail, $post) => $trail->parent('home')->push($post->title, route('post', $post)));
-
-        $html = $this->get('/post/1')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_can_handle_resourceful_controllers(): void
-    {
-        Route::middleware(SubstituteBindings::class)->resource('post', PostsController::class);
-
-        Breadcrumbs::for('post.index', fn (Generator $trail) => $trail->push('Posts', route('post.index')));
-
-        // Posts > Upload Post
-        Breadcrumbs::for('post.create', fn (Generator $trail) => $trail->parent('post.index')->push('New Post', route('post.create')));
-
-        // Posts > [Post Name]
-        Breadcrumbs::for('post.show', fn (Generator $trail, Post $post) => $trail->parent('post.index')->push($post->title, route('post.show', $post->id)));
-
-        // Posts > [Post Name] > Edit Post
-        Breadcrumbs::for('post.edit', fn (Generator $trail, Post $post) => $trail->parent('post.show', $post)->push('Edit Post', route('post.edit', $post->id)));
-
-        $html = $this->get('/post/1/edit')->content();
-
-        $this->assertHtml($html);
-    }
+        $trail->parent('home')->push($post->title, route('post', $post));
+    });
 }
