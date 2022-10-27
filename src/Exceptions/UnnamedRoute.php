@@ -26,7 +26,7 @@ class UnnamedRoute extends Exception implements ProvidesSolution
     public function getSolution(): Solution
     {
         $method = strtolower(Arr::first($this->route->methods()));
-        $uri = $this->route->uri();
+        $uri = "/{$this->route->uri()}";
         $action = $this->route->getActionName();
 
         if ($action === '\Illuminate\Routing\ViewController') {
