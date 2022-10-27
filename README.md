@@ -49,6 +49,14 @@ For more documentation, please visit: https://randallwilk.dev/docs/laravel-bread
 
 ## Testing
 
+On a fresh install, run the setup bin script first, otherwise certain DOM assertions won't work.
+
+```bash
+./bin/setup.sh
+```
+
+For convenience, a composer script is setup to run the pest test suite in parallel.
+
 ``` bash
 composer test
 ```
