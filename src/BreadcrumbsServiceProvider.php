@@ -5,49 +5,42 @@ declare(strict_types=1);
 namespace Rawilk\Breadcrumbs;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Support\Arr;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Rawilk\Breadcrumbs\Contracts\Generator;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrableProvider
+class BreadcrumbsServiceProvider extends PackageServiceProvider implements DeferrableProvider
 {
-    public function boot(): void
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/breadcrumbs.php' => config_path('breadcrumbs.php'),
-            ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/breadcrumbs'),
-            ], 'views');
-        }
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'breadcrumbs');
-
-        $this->registerBreadcrumbs();
-
-        $this->bootBladeComponents();
+        $package
+            ->name('laravel-breadcrumbs')
+            ->hasConfigFile()
+            ->hasViews('breadcrumbs');
     }
 
-    public function register(): void
+    public function packageRegistered(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/breadcrumbs.php', 'breadcrumbs');
-
         $this->app->bind(Generator::class, config('breadcrumbs.generator_class'));
 
         $this->app->singleton(Breadcrumbs::class, config('breadcrumbs.breadcrumbs_class'));
     }
 
+    public function packageBooted(): void
+    {
+        $this->bootBreadcrumbs();
+        $this->bootBladeComponents();
+    }
+
     protected function bootBladeComponents(): void
     {
-        $this->callAfterResolving(BladeCompiler::class, static function (BladeCompiler $blade) {
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $blade->component('breadcrumbs::components.breadcrumbs', 'breadcrumbs');
         });
     }
 
-    protected function registerBreadcrumbs(): void
+    protected function bootBreadcrumbs(): void
     {
         $files = config('breadcrumbs.files');
 
@@ -55,11 +48,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrablePr
             return;
         }
 
-        if (! is_array($files)) {
-            $files = [$files];
-        }
-
-        $files = Arr::flatten($files);
+        $files = collect($files)->flatten();
 
         foreach ($files as $file) {
             if (is_file($file)) {
