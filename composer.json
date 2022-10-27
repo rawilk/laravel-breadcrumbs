@@ -24,7 +24,8 @@
         "facade/ignition-contracts": "^1.0",
         "illuminate/contracts": "^9.0",
         "illuminate/routing": "^9.0",
-        "illuminate/support": "^9.0"
+        "illuminate/support": "^9.0",
+        "spatie/laravel-package-tools": "^1.13"
     },
     "require-dev": {
         "doctrine/dbal": "^2.12",
