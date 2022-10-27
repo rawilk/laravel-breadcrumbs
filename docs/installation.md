@@ -20,4 +20,3 @@ php artisan vendor:publish --tag="breadcrumbs-config"
 ```
 
 You can view the default configuration here: https://github.com/rawilk/laravel-breadcrumbs/blob/{version}/config/breadcrumbs.php
-
