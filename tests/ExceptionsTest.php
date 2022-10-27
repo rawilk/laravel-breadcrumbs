@@ -2,137 +2,107 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
 use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbAlreadyDefined;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsViewNotSet;
 use Rawilk\Breadcrumbs\Exceptions\UnnamedRoute;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
+use Sinnbeck\DomAssertions\Asserts\AssertElement;
+use function Pest\Laravel\get;
 
-class ExceptionsTest extends TestCase
-{
-    use AssertsSnapshots;
+it('throws an exception when a breadcrumb is defined twice', function () {
+    Breadcrumbs::for('duplicate', function () {
+    });
 
-    /** @test */
-    public function it_throws_an_exception_when_a_breadcrumb_is_defined_twice(): void
-    {
-        $this->expectException(BreadcrumbAlreadyDefined::class);
+    Breadcrumbs::for('duplicate', function () {
+    });
+})->throws(BreadcrumbAlreadyDefined::class);
 
-        Breadcrumbs::for('duplicate', function () {
+it('throws an exception if a breadcrumb is not found', function () {
+    config([
+        'breadcrumbs.exceptions.not_registered' => true,
+    ]);
+
+    Breadcrumbs::render('not-defined');
+})->throws(BreadcrumbsNotRegistered::class);
+
+test('the breadcrumb not found exception can be disabled via config', function () {
+    config([
+        'breadcrumbs.exceptions.not_registered' => false,
+    ]);
+
+    // Will render <p>No breadcrumbs</p> from our test fixtures directory.
+    Route::get('/test', fn () => Breadcrumbs::render('not-defined'));
+
+    get('/test')
+        ->assertElementExists('p', function (AssertElement $p) {
+            $p->has('text', 'No breadcrumbs');
         });
-        Breadcrumbs::for('duplicate', function () {
+});
+
+it('throws an exception if the breadcrumbs view is not set', function () {
+    config([
+        'breadcrumbs.view' => '',
+    ]);
+
+    Breadcrumbs::for('home', fn ($trail) => $trail->push('Home', url('/')));
+
+    Breadcrumbs::render('home');
+})->expectException(BreadcrumbsViewNotSet::class);
+
+it('throws an exception for missing route bound breadcrumbs', function () {
+    config([
+        'breadcrumbs.exceptions.missing_route_bound_breadcrumb' => true,
+    ]);
+
+    Route::get('/', fn () => Breadcrumbs::render())->name('home');
+
+    get('/');
+})->expectException(BreadcrumbsNotRegistered::class);
+
+it('will not throw an exception for missing route bound breadcrumbs if disabled in the config', function () {
+    config([
+        'breadcrumbs.exceptions.missing_route_bound_breadcrumb' => false,
+    ]);
+
+    Route::get('/', fn () => Breadcrumbs::render())->name('home');
+
+    get('/')
+        ->assertElementExists('p', function (AssertElement $p) {
+            $p->has('text', 'No breadcrumbs');
         });
-    }
+});
 
-    /** @test */
-    public function it_throws_an_exception_if_a_breadcrumb_is_not_found(): void
-    {
-        config([
-            'breadcrumbs.exceptions.not_registered' => true,
-        ]);
+it('throws an exception for route bound routes if the current route is not named', function () {
+    config([
+        'breadcrumbs.exceptions.unnamed_route' => true,
+    ]);
 
-        $this->expectException(BreadcrumbsNotRegistered::class);
+    Route::get('/blog', fn () => Breadcrumbs::render());
 
-        Breadcrumbs::render('not-defined');
-    }
+    get('/blog');
+})->expectException(UnnamedRoute::class);
 
-    /** @test */
-    public function the_breadcrumb_not_found_exception_can_be_disabled_via_config(): void
-    {
-        config([
-            'breadcrumbs.exceptions.not_registered' => false,
-        ]);
+it('throws an exception on the home route if it is not named', function () {
+    config([
+        'breadcrumbs.exceptions.unnamed_route' => true,
+    ]);
 
-        $html = Breadcrumbs::render('not-defined');
+    Route::get('/', fn () => Breadcrumbs::render());
 
-        // <p>No breadcrumbs</p>
-        $this->assertHtml($html);
-    }
+    get('/');
+})->expectException(UnnamedRoute::class);
 
-    /** @test */
-    public function it_throws_an_exception_if_the_breadcrumbs_view_is_not_set(): void
-    {
-        config([
-            'breadcrumbs.view' => '',
-        ]);
+test('the unnamed route exception can be disabled via config', function () {
+    config([
+        'breadcrumbs.exceptions.unnamed_route' => false,
+    ]);
 
-        $this->expectException(BreadcrumbsViewNotSet::class);
+    Route::get('/', fn () => Breadcrumbs::render());
 
-        Breadcrumbs::for('home', fn ($trail) => $trail->push('Home', url('/')));
-
-        Breadcrumbs::render('home');
-    }
-
-    /** @test */
-    public function it_throws_exceptions_for_missing_route_bound_breadcrumbs(): void
-    {
-        config([
-            'breadcrumbs.exceptions.missing_route_bound_breadcrumb' => true,
-        ]);
-
-        $this->expectException(BreadcrumbsNotRegistered::class);
-
-        Route::get('/', fn () => Breadcrumbs::render())->name('home');
-
-        $this->get('/');
-    }
-
-    /** @test */
-    public function it_will_not_throw_an_exception_for_missing_route_bound_breadcrumbs_if_disabled_in_the_config(): void
-    {
-        config([
-            'breadcrumbs.exceptions.missing_route_bound_breadcrumb' => false,
-        ]);
-
-        Route::get('/', fn () => Breadcrumbs::render())->name('home');
-
-        $html = $this->get('/')->content();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_throws_an_exception_for_route_bound_routes_if_the_current_route_is_not_named(): void
-    {
-        config([
-            'breadcrumbs.exceptions.unnamed_route' => true,
-        ]);
-
-        $this->expectException(UnnamedRoute::class);
-
-        Route::get('/blog', fn () => Breadcrumbs::render());
-
-        $this->get('/blog');
-    }
-
-    /** @test */
-    public function it_throws_an_exception_on_the_home_route_if_it_is_not_named(): void
-    {
-        config([
-            'breadcrumbs.exceptions.unnamed_route' => true,
-        ]);
-
-        $this->expectException(UnnamedRoute::class);
-
-        Route::get('/', fn () => Breadcrumbs::render());
-
-        $this->get('/');
-    }
-
-    /** @test */
-    public function the_unnamed_route_exception_can_be_disabled_via_config(): void
-    {
-        config([
-            'breadcrumbs.exceptions.unnamed_route' => false,
-        ]);
-
-        Route::get('/', fn () => Breadcrumbs::render());
-
-        $html = $this->get('/')->content();
-
-        $this->assertHtml($html);
-    }
-}
+    get('/')
+        ->assertElementExists('p', function (AssertElement $p) {
+            $p->has('text', 'No breadcrumbs');
+        });
+});

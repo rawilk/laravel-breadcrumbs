@@ -2,29 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
+use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
+use Rawilk\Breadcrumbs\Tests\Support\ConfiguresForGlob;
+use Sinnbeck\DomAssertions\Asserts\AssertElement;
+use function Pest\Laravel\get;
 
-class GlobLoadingTest extends TestCase
-{
-    use AssertsSnapshots;
+uses(ConfiguresForGlob::class);
 
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
+it('loads all files matched by glob', function () {
+    Route::get('/test', fn () => Breadcrumbs::render('multiple-file-test'))->name('test');
 
-        $app['config']->set('breadcrumbs.files', [
-            glob(__DIR__ . '/breadcrumbs/*.php'),
-        ]);
-    }
-
-    /** @test */
-    public function it_loads_all_files_matched_by_glob(): void
-    {
-        $html = Breadcrumbs::render('multiple-file-test');
-
-        $this->assertHtml($html);
-    }
-}
+    get('/test')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 2)
+                ->contains('li.current', 1)
+                ->find('li:nth-of-type(1)', function (AssertElement $li) {
+                    $li->has('text', 'Parent');
+                })
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Loaded');
+                });
+        });
+});

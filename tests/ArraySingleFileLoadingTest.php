@@ -2,29 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
+use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
+use Rawilk\Breadcrumbs\Tests\Support\ConfiguresForSingleFile;
+use Sinnbeck\DomAssertions\Asserts\AssertElement;
+use function Pest\Laravel\get;
 
-class ArraySingleFileLoadingTest extends TestCase
-{
-    use AssertsSnapshots;
+uses(ConfiguresForSingleFile::class);
 
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
+it('loads a single file in array form', function () {
+    Route::get('/test', fn () => Breadcrumbs::render('single-file-test'));
 
-        $app['config']->set('breadcrumbs.files', [
-            __DIR__ . '/routes/breadcrumbs.php',
-        ]);
-    }
-
-    /** @test */
-    public function it_loads_a_single_file_in_array_form(): void
-    {
-        $html = Breadcrumbs::render('single-file-test');
-
-        $this->assertHtml($html);
-    }
-}
+    get('/test')
+        ->assertElementExists('ol', function (AssertElement $ol) {
+            $ol->contains('li', 1)
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Loaded');
+                });
+        });
+});

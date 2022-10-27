@@ -2,25 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
+use Illuminate\Support\Collection;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Rawilk\Breadcrumbs\Tests\Support\CustomGenerator;
+use Rawilk\Breadcrumbs\Tests\Support\UsesCustomGenerator;
 
-class CustomGeneratorTest extends TestCase
-{
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
+uses(UsesCustomGenerator::class);
 
-        $app['config']['breadcrumbs.generator_class'] = CustomGenerator::class;
-    }
+test('a custom generator can be used', function () {
+    $breadcrumbs = Breadcrumbs::generate();
 
-    /** @test */
-    public function a_custom_generator_can_be_used(): void
-    {
-        $breadcrumbs = Breadcrumbs::generate();
-
-        self::assertSame('custom-generator', $breadcrumbs[0]);
-    }
-}
+    expect($breadcrumbs)->toBeInstanceOf(Collection::class)
+        ->and($breadcrumbs[0])->toBe('custom-generator');
+});

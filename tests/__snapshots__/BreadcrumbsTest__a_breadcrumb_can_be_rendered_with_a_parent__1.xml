@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ol>
-  <li>
-    <a href="http://localhost">Home</a>
-  </li>
-  <li class="current">Blog</li>
-</ol>

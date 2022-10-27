@@ -2,70 +2,77 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
+use Illuminate\Support\Facades\Route;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
-use Rawilk\Breadcrumbs\Tests\Concerns\AssertsSnapshots;
+use Sinnbeck\DomAssertions\Asserts\AssertElement;
+use function Pest\Laravel\get;
 
-class OutputTest extends TestCase
-{
-    use AssertsSnapshots;
+beforeEach(function () {
+    $this->domain = 'http://localhost';
 
-    protected object $category;
+    // Home (normal link)
+    Breadcrumbs::for(
+        'home',
+        fn (Generator $trail) => $trail->push('Home', url('/'))
+    );
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    // Home > Blog (not a link)
+    Breadcrumbs::for(
+        'blog',
+        fn (Generator $trail) => $trail->parent('home')->push('Blog')
+    );
 
-        // Home (normal link)
-        Breadcrumbs::for(
-            'home',
-            fn (Generator $trail) => $trail->push('Home', url('/'))
-        );
+    // Home > Blog > [Category] (Active page)
+    Breadcrumbs::for(
+        'category',
+        fn (Generator $trail, $category) => $trail->parent('blog')->push($category->title, url('blog/category/' . $category->id))
+    );
 
-        // Home > Blog (not a link)
-        Breadcrumbs::for(
-            'blog',
-            fn (Generator $trail) => $trail->parent('home')->push('Blog')
-        );
+    $this->category = (object) [
+        'id' => 123,
+        'title' => 'Example Category',
+    ];
+});
 
-        // Home > Blog > [Category] (Active page)
-        Breadcrumbs::for(
-            'category',
-            fn (Generator $trail, $category) => $trail->parent('blog')->push($category->title, url('blog/category/' . $category->id))
-        );
+it('renders breadcrumbs with params', function () {
+    // {!! Breadcrumbs::render('category', $category) !!}
+    Route::get('/category/{category}', fn () => view('category')->with('category', $this->category))->name('category');
 
-        $this->category = (object) [
-            'id' => 123,
-            'title' => 'Example Category',
-        ];
-    }
+    get('/category/123')
+        ->assertElementExists('nav > ol', function (AssertElement $ol) {
+            $ol->contains('li', 3)
+                ->contains('li.current', 1)
+                ->find('li:nth-of-type(1)', function (AssertElement $li) {
+                    $li->is('li')
+                        ->contains('a', [
+                            'href' => $this->domain,
+                            'text' => 'Home',
+                        ]);
+                })
+                ->find('li:nth-of-type(2)', function (AssertElement $li) {
+                    $li->has('text', 'Blog')
+                        ->doesntContain('a');
+                })
+                ->find('li.current', function (AssertElement $li) {
+                    $li->has('text', 'Example Category');
+                });
+        });
+});
 
-    /** @test */
-    public function it_renders_breadcrumbs_with_params(): void
-    {
-        // {{ Breadcrumbs::render('category', $category) }}
-        $html = view('category')->with('category', $this->category)->render();
+it('renders in plain php views', function () {
+    // <?php echo Breadcrumbs::render('category', $category);
+    Route::get('/test', fn () => view('view-php')->with('category', $this->category))->name('test');
 
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_renders_breadcrumbs_into_yielded_sections(): void
-    {
-        // @section('breadcrumbs', Breadcrumbs::render('category', $category))
-        $html = view('view-section')->with('category', $this->category)->render();
-
-        $this->assertHtml($html);
-    }
-
-    /** @test */
-    public function it_renders_in_plain_php_views(): void
-    {
-        // <?php echo Breadcrumbs::render('category', $category);
-        $html = view('view-php')->with('category', $this->category)->render();
-
-        $this->assertHtml($html);
-    }
-}
+    get('/test')
+        ->assertElementExists('nav#php-view-nav', function (AssertElement $nav) {
+            $nav->contains('ol', 1)
+                ->find('ol', function (AssertElement $ol) {
+                    $ol->contains('li', 3)
+                        ->find('li.current', function (AssertElement $li) {
+                            $li->has('text', 'Example Category')
+                                ->doesntContain('a');
+                        });
+                });
+        });
+});

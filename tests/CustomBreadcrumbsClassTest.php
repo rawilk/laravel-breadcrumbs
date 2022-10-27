@@ -2,25 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rawilk\Breadcrumbs\Tests;
-
+use Illuminate\Support\Collection;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Rawilk\Breadcrumbs\Tests\Support\CustomBreadcrumbs;
+use Rawilk\Breadcrumbs\Tests\Support\UsesCustomBreadcrumbs;
 
-class CustomBreadcrumbsClassTest extends TestCase
-{
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
+uses(UsesCustomBreadcrumbs::class);
 
-        $app['config']['breadcrumbs.breadcrumbs_class'] = CustomBreadcrumbs::class;
-    }
+test('a custom breadcrumbs class can be used', function () {
+    $breadcrumbs = Breadcrumbs::generate();
 
-    /** @test */
-    public function a_custom_breadcrumbs_class_can_be_used(): void
-    {
-        $breadcrumbs = Breadcrumbs::generate();
-
-        self::assertSame('custom-manager', $breadcrumbs[0]);
-    }
-}
+    expect($breadcrumbs)->toBeInstanceOf(Collection::class)
+        ->and($breadcrumbs[0])->toBe('custom-breadcrumbs-class');
+});

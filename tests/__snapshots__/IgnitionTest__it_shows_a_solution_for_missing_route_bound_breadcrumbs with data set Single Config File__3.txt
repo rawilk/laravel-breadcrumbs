@@ -1,4 +1,0 @@
-'Defining Breadcrumbs': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/usage/defining-breadcrumbs'
-'Route-Bound Breadcrumbs': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/advanced-usage/route-bound-breadcrumbs'
-'Silencing Breadcrumb Exceptions': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/installation#config'
-'Laravel Breadcrumbs Documentation': 'https://docs.randallwilk.dev/laravel-breadcrumbs/v3/introduction'

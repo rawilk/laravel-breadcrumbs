@@ -1,4 +1,0 @@
-
-```php
-Breadcrumbs::for('missing', fn (Generator $trail) => $trail->push('Title Here', url('/')));
-```
