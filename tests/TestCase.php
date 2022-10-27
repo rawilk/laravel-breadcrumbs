@@ -8,12 +8,13 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rawilk\Breadcrumbs\BreadcrumbsServiceProvider;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
-use Sinnbeck\DomAssertions\DomAssertionsServiceProvider;
 use Spatie\LaravelRay\RayServiceProvider;
 
 class TestCase extends Orchestra
 {
     use InteractsWithViews;
+
+    protected $enablesPackageDiscoveries = true;
 
     protected function setUp(): void
     {
@@ -25,7 +26,6 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            DomAssertionsServiceProvider::class,
             RayServiceProvider::class,
             BreadcrumbsServiceProvider::class,
         ];
