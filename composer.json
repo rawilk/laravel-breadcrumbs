@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^8.1",
         "facade/ignition-contracts": "^1.0",
         "illuminate/contracts": "^9.0",
         "illuminate/routing": "^9.0",
