@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Rawilk\Breadcrumbs\Breadcrumbs clearCurrentRoute()
  * @method static void macro(string $name, object|callable $macro)
  * @method static bool hasMacro(string $name)
+ *
  * @see \Rawilk\Breadcrumbs\Breadcrumbs
  */
 class Breadcrumbs extends Facade

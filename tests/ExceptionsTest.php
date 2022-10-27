@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use function Pest\Laravel\get;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbAlreadyDefined;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsViewNotSet;
 use Rawilk\Breadcrumbs\Exceptions\UnnamedRoute;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Sinnbeck\DomAssertions\Asserts\AssertElement;
-use function Pest\Laravel\get;
 
 it('throws an exception when a breadcrumb is defined twice', function () {
     Breadcrumbs::for('duplicate', function () {

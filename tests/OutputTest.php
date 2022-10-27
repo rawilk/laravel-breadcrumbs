@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use function Pest\Laravel\get;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
 use Sinnbeck\DomAssertions\Asserts\AssertElement;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->domain = 'http://localhost';

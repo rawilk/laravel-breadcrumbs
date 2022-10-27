@@ -11,6 +11,7 @@ use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 class Generator implements GeneratorContract
 {
     protected Collection $breadcrumbs;
+
     protected array $callbacks = [];
 
     public function generate(array $callbacks, array $before, string $name, array $params): Collection

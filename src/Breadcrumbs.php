@@ -19,7 +19,9 @@ class Breadcrumbs
     use Macroable;
 
     protected array $callbacks = [];
+
     protected array $before = [];
+
     protected ?array $route = null;
 
     public function __construct(
@@ -32,8 +34,9 @@ class Breadcrumbs
     /**
      * Register a breadcrumb-generating callback for a page.
      *
-     * @param string $name
-     * @param callable $callback
+     * @param  string  $name
+     * @param  callable  $callback
+     *
      * @throws \Rawilk\Breadcrumbs\Exceptions\BreadcrumbAlreadyDefined
      */
     public function for(string $name, callable $callback): void
@@ -49,7 +52,7 @@ class Breadcrumbs
      * Register a closure to call to generate a breadcrumbs item before each page.
      * Useful for prepending pages like a "home" page automatically each time.
      *
-     * @param callable $callback
+     * @param  callable  $callback
      */
     public function before(callable $callback): void
     {
@@ -130,6 +133,7 @@ class Breadcrumbs
      * Get the current route name and parameters.
      *
      * @return array
+     *
      * @throws \Rawilk\Breadcrumbs\Exceptions\UnnamedRoute
      */
     protected function getCurrentRoute(): array

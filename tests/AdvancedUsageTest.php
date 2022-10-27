@@ -5,12 +5,12 @@ declare(strict_types=1);
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
+use function Pest\Laravel\get;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
 use Rawilk\Breadcrumbs\Tests\Fixtures\app\Models\Post;
 use Sinnbeck\DomAssertions\Asserts\AssertElement;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->domain = 'http://localhost';

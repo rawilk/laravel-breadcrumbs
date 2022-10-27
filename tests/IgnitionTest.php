@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use function Pest\Laravel\get;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbAlreadyDefined;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsNotRegistered;
 use Rawilk\Breadcrumbs\Exceptions\BreadcrumbsViewNotSet;
@@ -10,7 +11,6 @@ use Rawilk\Breadcrumbs\Exceptions\UnnamedRoute;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
 use Rawilk\Breadcrumbs\Tests\Fixtures\app\Http\Controllers\PostsController;
-use function Pest\Laravel\get;
 
 it('shows a solution for duplicate breadcrumbs', function (array $files) {
     config([
