@@ -20,5 +20,5 @@ Breadcrumbs::macro('pageTitle', function () {
 ```
 
 ```html
-<title>{{ Breadcrumbs::pageTitle() }}</title>
+<title>{!! Breadcrumbs::pageTitle() !!}</title>
 ```
