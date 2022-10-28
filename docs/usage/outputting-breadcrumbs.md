@@ -26,19 +26,14 @@ Or with a parameter:
 In the page (e.g. `resources/views/home.blade.php`):
 
 ```html
-@extends('layouts.master')
-
-@section('breadcrumbs')
-    {!! Breadcrumbs::render('home') !!}
-@endsection
+@extends('layouts.master') @section('breadcrumbs') {!!
+Breadcrumbs::render('home') !!} @endsection
 ```
 
 Or using the shorthand syntax:
 
 ```html
-@extends('layouts.master')
-
-@section('breadcrumbs', Breadcrumbs::render('home'))
+@extends('layouts.master') @section('breadcrumbs', Breadcrumbs::render('home'))
 ```
 
 And in the layout file (e.g. `resources/views/layouts/master.blade.php`):
@@ -48,6 +43,7 @@ And in the layout file (e.g. `resources/views/layouts/master.blade.php`):
 ```
 
 ## Pure PHP (without Blade)
+
 In the page (e.g. `resources/views/home.php`):
 
 ```php
@@ -62,14 +58,11 @@ use `Breadcrumbs::view()` to render the `breadcrumbs::json-ld` template in addit
 ```html
 <html>
     <head>
-        ...
-        {!! Breadcrumbs::view('breadcrumbs::json-ld', 'category', $category) !!}
-        ...
+        ... {!! Breadcrumbs::view('breadcrumbs::json-ld', 'category', $category)
+        !!} ...
     </head>
     <body>
-        ...
-        {!! Breadcrumbs::render('category', $category) !!}
-        ...
+        ... {!! Breadcrumbs::render('category', $category) !!} ...
     </body>
 </html>
 ```

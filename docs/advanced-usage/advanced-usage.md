@@ -30,7 +30,7 @@ template, like this:
 ```html
 <li>
     <a href="{{ $breadcrumb->url }}">
-        <img src="/images/icons/{{ $breadcrumb->icon }}">
+        <img src="/images/icons/{{ $breadcrumb->icon }}" />
         {{ $breadcrumb->title }}
     </a>
 </li>
@@ -44,7 +44,10 @@ To get the last breadcrumb for the current page, use `Breadcrumb::current()`. Fo
 output the current page title:
 
 ```html
-<title>{{ ($breadcrumb = Breadcrumb::current()) ? $breadcrumb->title : 'Fallback Title'  }}</title>
+<title>
+    {{ ($breadcrumb = Breadcrumb::current()) ? $breadcrumb->title : 'Fallback
+    Title' }}
+</title>
 ```
 
 To ignore a breadcrumb, add `'current' => false` ot the `$data` parameter in `push()`. This can be useful to ignore pagination breadcrumbs.
@@ -63,12 +66,12 @@ Breadcrumbs::for('post', function (Generator $trail, Post $post) {
 ```html
 <title>
     {{ ($breadcrumb = Breadcrumbs::current()) ? "{$breadcrumb->title} -" : '' }}
-    {{ ($page = (int) request('page')) > 1 ? "Page {$page} -" : '' }}
-    Acme
+    {{ ($page = (int) request('page')) > 1 ? "Page {$page} -" : '' }} Acme
 </title>
 ```
 
 ## Switching Views at Runtime
+
 You can use `Breadcrumbs::view()` in place of `Breadcrumbs::render()` to render a template other than the [default one](/docs/laravel-breadcrumbs/{version}/usage/basic-usage#choose-a-template):
 
 ```html
@@ -88,7 +91,8 @@ Config::set('breadcrumbs.view', 'partials.breadcrumbs2');
 Or you could call `Breadcrumbs::generate()` to get the breadcrumbs collection and load the view manually:
 
 ```html
-@include('partials.breadcrumbs2', ['breadcrumbs' => Breadcrumbs::generate('category', $category)])
+@include('partials.breadcrumbs2', ['breadcrumbs' =>
+Breadcrumbs::generate('category', $category)])
 ```
 
 ## Overriding the "Current" Route

@@ -55,10 +55,10 @@ In the `config/breadcrumbs.php` file, edit this line:
 
 Other predefined templates include:
 
-- `breadcrumbs::bootstrap4` - [Bootstrap 4](https://getbootstrap.com/docs/4.0/components/breadcrumb/)
-- `breadcrumbs::bulma` - [Bulma](https://bulma.io/documentation/components/breadcrumb/)
-- `breadcrumbs::json-ld` - [JSON-LD Structured Data](https://developers.google.com/search/docs/data-types/breadcrumbs) (`<script />` tag, no visible output)
-- The path to a custom view: e.g. `partials.breadcrumbs`
+-   `breadcrumbs::bootstrap4` - [Bootstrap 4](https://getbootstrap.com/docs/4.0/components/breadcrumb/)
+-   `breadcrumbs::bulma` - [Bulma](https://bulma.io/documentation/components/breadcrumb/)
+-   `breadcrumbs::json-ld` - [JSON-LD Structured Data](https://developers.google.com/search/docs/data-types/breadcrumbs) (`<script />` tag, no visible output)
+-   The path to a custom view: e.g. `partials.breadcrumbs`
 
 > {tip} See [Custom Templates](/docs/laravel-breadcrumbs/{version}/usage/custom-templates) for more details.
 
@@ -67,9 +67,8 @@ Other predefined templates include:
 Finally, call `Breadcrumbs::render()` in the view for each page, passing it the name of the breadcrumb to use and any additional parameters you need.
 
 ```html
-{!! Breadcrumbs::render('home') !!}
-
-{!! Breadcrumbs::render('category', $category) !!}
+{!! Breadcrumbs::render('home') !!} {!! Breadcrumbs::render('category',
+$category) !!}
 ```
 
 > {tip} See [Outputting Breadcrumbs](/docs/laravel-breadcrumbs/{version}/usage/outputting-breadcrumbs) for other output options, and see

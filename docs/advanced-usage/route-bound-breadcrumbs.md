@@ -86,6 +86,7 @@ Similarly, to prevent it from throwing an `UnnamedRoute` Exception if the curren
 ```
 
 ## Route Model Binding
+
 Laravel Breadcrumbs uses the same binding as the controller. For example:
 
 ```php

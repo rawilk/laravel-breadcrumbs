@@ -10,6 +10,7 @@ and the URL to link it to. Since these are likely to change dynamically, you do 
 need into the closure.
 
 ## Static Pages
+
 The most simple breadcrumb is probably going to be your homepage, which could look something like this:
 
 ```php
@@ -27,11 +28,11 @@ When you call `$trail->push($title, $url)` inside the closure, it adds a breadcr
 
 For generating a URL, you can use any of the standard Laravel URL-generation methods, including:
 
-- `url('path/to/route')` (`URL::to()`)
-- `secure_url('path/to/route')`
-- `route('route-name')` or `route('route-name', 'param')` or `route('route-name', ['param1', 'param2'])` (`URL::route()`)
-- `action('controller@action')` (`URL::action()`)
-- Or just pass a string URL (`http://www.example.com`)
+-   `url('path/to/route')` (`URL::to()`)
+-   `secure_url('path/to/route')`
+-   `route('route-name')` or `route('route-name', 'param')` or `route('route-name', ['param1', 'param2'])` (`URL::route()`)
+-   `action('controller@action')` (`URL::action()`)
+-   Or just pass a string URL (`http://www.example.com`)
 
 This example would be rendered like this:
 
@@ -42,6 +43,7 @@ This example would be rendered like this:
 And results in this output:
 
 {.ignore}
+
 > Home
 
 ## Parent Links
@@ -66,6 +68,7 @@ It would be rendered like this:
 And results in this output:
 
 {.ignore}
+
 > [Home](#) / Blog
 
 > {note} The default templates do not create a link for the last breadcrumb (the one for the current page), even when a URL is specified.
@@ -89,6 +92,7 @@ The `$post` object (usually an [Eloquent](https://laravel.com/docs/7.x/eloquent)
 The output from this would be:
 
 {.ignore}
+
 > [Home](#) / [Blog](#) / Post Title
 
 > {tip} You can pass in multiple parameters if necessary.
@@ -132,4 +136,5 @@ Both would be rendered like this:
 The result could end up like this:
 
 {.ignore}
+
 > [Home](#) / [Blog](#) / [Grandparent Category](#) / [Parent Category](#) / Category Title
