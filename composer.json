@@ -28,7 +28,7 @@
         "spatie/laravel-package-tools": "^1.13"
     },
     "require-dev": {
-        "doctrine/dbal": "^2.12",
+        "doctrine/dbal": "^3.5",
         "laravel/pint": "^1.2",
         "orchestra/testbench": "^7.10",
         "pestphp/pest": "^1.22",
