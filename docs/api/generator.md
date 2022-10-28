@@ -6,6 +6,7 @@ sort: 2
 `Rawilk\Breadcrumbs\Support\Generator`
 
 ### push
+
 ```php
 /**
  * Push a link onto the breadcrumbs stack.
@@ -19,6 +20,7 @@ public function push(string $title, string $url = null, array $data = []): Gener
 ```
 
 ### parent
+
 ```php
 /**
  * Add an already defined breadcrumb onto the current breadcrumb stack.

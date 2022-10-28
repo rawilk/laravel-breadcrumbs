@@ -4,6 +4,7 @@ sort: 1
 ---
 
 ### for
+
 ```php
 /**
  * Register a new breadcrumb.
@@ -16,6 +17,7 @@ Breadcrumbs::for(string $name, callable $callback): void;
 ```
 
 ### before
+
 ```php
 /**
  * Register a breadcrumb to be rendered before every breadcrumb.
@@ -27,6 +29,7 @@ Breadcrumbs::before(callable $callback): void;
 ```
 
 ### exists
+
 ```php
 /**
  * Check if a breadcrumb exists.
@@ -39,6 +42,7 @@ Breadcrumbs::exists(string $name = null): bool;
 ```
 
 ### generate
+
 ```php
 /**
  * Generate breadcrumbs for the given registered breadcrumb, or the current route.
@@ -51,6 +55,7 @@ Breadcrumbs::generate(string $name = null, ...$params): Collection;
 ```
 
 ### view
+
 ```php
 /**
  * Render a registered breadcrumb using the given view.
@@ -64,6 +69,7 @@ Breadcrumbs::view(string $view, string $name = null, ...$params): string;
 ```
 
 ### render
+
 ```php
 /**
  * Render a registered breadcrumb.
@@ -76,6 +82,7 @@ Breadcrumbs::render(string $name = null, ...$params): string;
 ```
 
 ### current
+
 ```php
 /**
  * Retrieve the breadcrumb for the current page.
@@ -86,6 +93,7 @@ Breadcrumbs::current(): ?object;
 ```
 
 ### setCurrentRoute
+
 ```php
 /**
  * Manually override the current route.
@@ -98,6 +106,7 @@ Breadcrumbs::setCurrentRoute(string $name, ...$params): \Rawilk\Breadcrumbs\Brea
 ```
 
 ### clearCurrentRoute
+
 ```php
 /**
  * Clear the current route from Breadcrumbs.
@@ -108,6 +117,7 @@ Breadcrumbs::clearCurrentRoute(): \Rawilk\Breadcrumbs\Breadcrumbs;
 ```
 
 ### macro
+
 ```php
 /**
  * Register a custom macro.

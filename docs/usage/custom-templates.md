@@ -10,19 +10,16 @@ To customize the HTML, create your own view file (e.g. `resources/views/partials
 ```html
 @if (count($breadcrumbs))
 
-    <ol class="breadcrumbs">
-        @foreach ($breadcrumbs as $breadcrumb)
-
-            @if ($breadcrumb->url && ! $loop->last)
-                <li class="breadcrumb-item">
-                    <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
-                </li>
-            @else
-                <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
-            @endif
-
-        @endforeach
-    </ol>
+<ol class="breadcrumbs">
+    @foreach ($breadcrumbs as $breadcrumb) @if ($breadcrumb->url && !
+    $loop->last)
+    <li class="breadcrumb-item">
+        <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
+    </li>
+    @else
+    <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+    @endif @endforeach
+</ol>
 
 @endif
 ```
@@ -35,9 +32,9 @@ The view will receive an object called `$breadcrumbs`.
 
 Each breadcrumb is an object with the following keys:
 
-- `title` - The breadcrumb title
-- `url` - The breadcrumb URL, or `null` if none was given
-- Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/{version}/advanced-usage/advanced-usage#custom-data))
+-   `title` - The breadcrumb title
+-   `url` - The breadcrumb URL, or `null` if none was given
+-   Any additional keys for each item in `$data` (see [Custom Data](/docs/laravel-breadcrumbs/{version}/advanced-usage/advanced-usage#custom-data))
 
 ## Update the Config
 

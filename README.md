@@ -38,6 +38,7 @@ composer require rawilk/laravel-breadcrumbs
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --tag="breadcrumbs-config"
 ```
@@ -45,6 +46,7 @@ php artisan vendor:publish --tag="breadcrumbs-config"
 You can view the default configuration here: https://github.com/rawilk/laravel-breadcrumbs/blob/main/config/breadcrumbs.php
 
 ## Documentation
+
 For more documentation, please visit: https://randallwilk.dev/docs/laravel-breadcrumbs
 
 ## Testing
@@ -57,7 +59,7 @@ On a fresh install, run the setup bin script first, otherwise certain DOM assert
 
 For convenience, a composer script is setup to run the pest test suite in parallel.
 
-``` bash
+```bash
 composer test
 ```
 
@@ -75,9 +77,9 @@ If you discover any security related issues, please email randall@randallwilk.de
 
 ## Credits
 
-- [Randall Wilk](https://github.com/rawilk)
-- [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs)
-- [All Contributors](../../contributors)
+-   [Randall Wilk](https://github.com/rawilk)
+-   [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs)
+-   [All Contributors](../../contributors)
 
 ## License
 
