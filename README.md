@@ -4,6 +4,7 @@
 ![Tests](https://github.com/rawilk/laravel-breadcrumbs/workflows/Tests/badge.svg?style=flat-square)
 [![Total Downloads](https://img.shields.io/packagist/dt/rawilk/laravel-breadcrumbs.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/rawilk/laravel-breadcrumbs?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
+[![License](https://img.shields.io/github/license/rawilk/laravel-breadcrumbs?style=flat-square)](https://github.com/rawilk/laravel-breadcrumbs/blob/main/LICENSE.md)
 
 With Laravel Breadcrumbs, you can easily add breadcrumbs to your Laravel applications. This package works very similar to the
 [breadcrumbs package created by James Mills](https://github.com/davejamesmiller/laravel-breadcrumbs). I created my own version of the
