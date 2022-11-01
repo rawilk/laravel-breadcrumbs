@@ -8,11 +8,9 @@
 /.gitignore             export-ignore
 /.php-cs-fixer.dist.php export-ignore
 /.php_cs.dist           export-ignore
+/bin                    export-ignore
 /docs                   export-ignore
 /phpunit.xml.dist       export-ignore
 /pint.json              export-ignore
 /psalm.xml.dist         export-ignore
 /tests                  export-ignore
-
-# to make CI for windows happy on some snapshot tests...
-tests/**/__snapshots__/** text eol=lf
