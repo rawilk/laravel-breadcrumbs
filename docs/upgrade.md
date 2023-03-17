@@ -15,7 +15,7 @@ v4 of laravel-breadcrumbs now requires a minimum PHP version of `8.1`. Be sure y
 
 ### Tailwind Template
 
-v4 of laravel-breadcrumbs changed the default markup of the Tailwind breadcrumbs template. If you rely on the default markup and it does not suit your needs anymore, you may override it by publishing the tailwind blade partial. The following command can be run to publish the views:
+v4 of laravel-breadcrumbs changed the default markup of the Tailwind breadcrumbs template. If you rely on the default markup, and it does not suit your needs anymore, you may override it by publishing the tailwind blade partial. The following command can be run to publish the views:
 
 ```bash
 php artisan vendor:publish --provider="Rawilk\Breadcrumbs\BreadcrumbsServiceProvider" --tag="views"

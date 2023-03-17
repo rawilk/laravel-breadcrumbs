@@ -1,4 +1,4 @@
-# laravel-breadcrumbs
+# Breadcrumbs for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-breadcrumbs.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
 ![Tests](https://github.com/rawilk/laravel-breadcrumbs/workflows/Tests/badge.svg?style=flat-square)
@@ -6,7 +6,7 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/rawilk/laravel-breadcrumbs?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
 [![License](https://img.shields.io/github/license/rawilk/laravel-breadcrumbs?style=flat-square)](https://github.com/rawilk/laravel-breadcrumbs/blob/main/LICENSE.md)
 
-With Laravel Breadcrumbs, you can easily add breadcrumbs to your Laravel applications. This package works very similar to the
+With Breadcrumbs for Laravel, you can easily add breadcrumbs to your Laravel applications. This package works very similar to the
 [breadcrumbs package created by James Mills](https://github.com/davejamesmiller/laravel-breadcrumbs). I created my own version of the
 package because that one has been abandoned, and I want to continue to provide this kind of functionality in my own Laravel apps.
 
@@ -80,6 +80,10 @@ If you discover any security related issues, please email randall@randallwilk.de
 -   [Randall Wilk](https://github.com/rawilk)
 -   [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs)
 -   [All Contributors](../../contributors)
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
 
 ## License
 
