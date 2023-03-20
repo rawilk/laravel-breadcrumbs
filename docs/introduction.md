@@ -34,3 +34,7 @@ Now in a view somewhere, enter this:
 <!-- will render a partial with links for Home > About -->
 {!! Breadcrumbs::render('about') !!}
 ```
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
