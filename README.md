@@ -1,10 +1,14 @@
-# laravel-breadcrumbs
+# Breadcrumbs for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-breadcrumbs.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
 ![Tests](https://github.com/rawilk/laravel-breadcrumbs/workflows/Tests/badge.svg?style=flat-square)
 [![Total Downloads](https://img.shields.io/packagist/dt/rawilk/laravel-breadcrumbs.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/rawilk/laravel-breadcrumbs?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
+[![License](https://img.shields.io/github/license/rawilk/laravel-breadcrumbs?style=flat-square)](https://github.com/rawilk/laravel-breadcrumbs/blob/main/LICENSE.md)
 
-With Laravel Breadcrumbs, you can easily add breadcrumbs to your Laravel applications. This package works very similar to the
+![social image](https://banners.beyondco.de/Breadcrumbs%20for%20Laravel.png?theme=light&packageManager=composer+require&packageName=rawilk%2Flaravel-breadcrumbs&pattern=architect&style=style_1&description=Easily+add+breadcrumbs+to+a+Laravel+app.&md=1&showWatermark=0&fontSize=100px&images=chevron-double-right)
+
+With Breadcrumbs for Laravel, you can easily add breadcrumbs to your Laravel applications. This package works very similar to the
 [breadcrumbs package created by James Mills](https://github.com/davejamesmiller/laravel-breadcrumbs). I created my own version of the
 package because that one has been abandoned, and I want to continue to provide this kind of functionality in my own Laravel apps.
 
@@ -32,7 +36,7 @@ Breadcrumbs::for('about', function (Generator $trail)  {
 You can install the package via composer:
 
 ```bash
-composer require rawilk/laravel-breadcrumbs
+composer require rawilk/laravel-breadcrumbs:1.0
 ```
 
 You can publish the config file with:
@@ -126,6 +130,10 @@ If you discover any security related issues, please email randall@randallwilk.de
 - [Randall Wilk](https://github.com/rawilk)
 - [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs)
 - [All Contributors](../../contributors)
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
 
 ## License
 
