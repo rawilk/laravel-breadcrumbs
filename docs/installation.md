@@ -8,7 +8,7 @@ sort: 3
 laravel-breadcrumbs can be installed via composer:
 
 ```bash
-composer require rawilk/laravel-breadcrumbs
+composer require rawilk/laravel-breadcrumbs:2.0
 ```
 
 ## Config
