@@ -1,3 +1,5 @@
+**Notice:** In favor of using Filament, I have no need for this package anymore. As a result, I will no longer commit any more changes to it.
+
 # Breadcrumbs for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-breadcrumbs.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-breadcrumbs)
